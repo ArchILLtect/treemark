@@ -1,0 +1,51 @@
+{
+  "name": "treemark",
+  "version": "0.0.0-development",
+  "private": true,
+  "description": "Generate and synchronize Markdown-friendly directory trees.",
+  "type": "module",
+  "bin": {
+    "treemark": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "clean": "node --eval \"import('node:fs/promises').then(fs => fs.rm('dist', { recursive: true, force: true }))\"",
+    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "prepack": "npm run check",
+    "pack:check": "npm pack --dry-run"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "picomatch": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/picomatch": "^4.0.2",
+    "eslint": "^9.0.0",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^3.2.0",
+    "@eslint/js": "^9.0.0"
+  },
+  "keywords": [
+    "markdown",
+    "directory-tree",
+    "documentation",
+    "cli",
+    "docs",
+    "filesystem"
+  ],
+  "license": "MIT"
+}
