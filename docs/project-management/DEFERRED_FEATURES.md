@@ -1,0 +1,191 @@
+# Deferred Features
+
+This document tracks TreeMark features and enhancements that have been
+explicitly considered and intentionally deferred.
+
+Items listed here are not forgotten work and are not automatically part of
+the current MVP scope.
+
+When a deferred item becomes active work, move it into the appropriate phase
+plan or implementation checklist.
+
+---
+
+## Output and Snapshot Features
+
+### Timestamped structure snapshots
+
+Allow users to preserve historical structure maps instead of overwriting the
+same generated file.
+
+Possible future behavior:
+
+```bash
+treemark . --output structure-map.md --snapshot
+```
+
+Potential generated names:
+
+```text
+structure-map-2026-08-09.md
+structure-map-2026-08-09T1202.md
+```
+
+Open decisions:
+
+- Final CLI syntax.
+- Timestamp format.
+- Local time vs UTC.
+- Date-only vs date-and-time naming.
+- Filename collision behavior.
+- Snapshot storage location.
+- Retention or cleanup policy.
+
+Status: Deferred post-MVP.
+
+### Large-tree presentation modes
+
+Potential alternatives for very large directory structures:
+
+- Directories-only output.
+- Compact or summary modes.
+- Collapsible Markdown using `<details>`.
+- Separate generated structure-map files.
+- Interactive HTML presentation.
+
+Status: Deferred post-MVP.
+
+---
+
+## Additional Renderers
+
+- Mermaid output.
+- SVG generation.
+- Standalone HTML output.
+
+Status: Deferred post-MVP.
+
+---
+
+## Scanner and Filesystem Features
+
+### Symlink traversal
+
+MVP behavior skips symbolic links.
+
+Potential future options may include:
+
+- Show symlinks without following them.
+- Include link targets.
+- Safely follow symlinked directories.
+- Cycle detection and traversal-boundary protection.
+
+Status: Deferred post-MVP.
+
+### `.gitignore` integration
+
+Allow TreeMark to optionally import or honor repository `.gitignore` rules.
+
+Status: Deferred post-MVP.
+
+### Configuration files
+
+Support persistent TreeMark configuration instead of requiring all behavior
+to be supplied through CLI flags.
+
+Status: Deferred post-MVP.
+
+### Automatic output-directory creation
+
+Potential option to create missing parent directories for `--output`.
+
+Current behavior requires the parent directory to already exist.
+
+Status: Deferred unless demand justifies it.
+
+---
+
+## Synchronization Features
+
+### Automatic marker insertion
+
+Automatically create TreeMark markers when an update target does not already
+contain them.
+
+Current MVP contract requires markers to exist beforehand.
+
+Status: Deferred post-MVP.
+
+### Multiple named marker regions
+
+Allow multiple independently managed TreeMark regions inside one Markdown
+document.
+
+Status: Deferred post-MVP.
+
+### Custom marker strings
+
+Allow users to configure marker names or marker syntax.
+
+Status: Deferred post-MVP.
+
+### Markdown AST parsing
+
+Use structured Markdown parsing instead of the MVP marker/string-based
+approach.
+
+Status: Deferred post-MVP.
+
+---
+
+## Automation and Continuous Operation
+
+### Watch mode
+
+Automatically regenerate output when the filesystem changes.
+
+Status: Deferred post-MVP.
+
+### Automatic Git hook installation
+
+TreeMark may support or document pre-commit integration, but automatic
+installation or management of Git hooks is deferred.
+
+Status: Deferred post-MVP.
+
+---
+
+## Extensibility
+
+### Plugin architecture
+
+Allow third-party renderers, scanners, or transformations.
+
+Status: Deferred post-MVP.
+
+### Public programmatic API
+
+Expose TreeMark as a supported JavaScript/TypeScript library in addition to
+the CLI.
+
+Status: Deferred post-MVP.
+
+---
+
+## CLI / UX Features
+
+### Interactive prompts
+
+Interactive configuration or guided command flows.
+
+Status: Deferred post-MVP.
+
+---
+
+## Notes
+
+- `--check` is not listed here while it remains part of the MVP roadmap; it is
+  scheduled for a later implementation phase rather than deferred from MVP.
+- `--update` is likewise active MVP work and belongs to Phase 6, not this file.
+- Items should only be added here when the project has explicitly decided to
+  postpone them, not merely because they have not been implemented yet.
