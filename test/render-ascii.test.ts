@@ -2,6 +2,7 @@ import { expect, test } from "vitest";
 
 import { renderAscii } from "../src/render/render-ascii.js";
 import type { TreeNode } from "../src/types.js";
+import { renderMarkdown } from "../src/render/render-markdown.js";
 
 const tree: TreeNode = {
   name: "docs",
@@ -203,4 +204,11 @@ test("does not mutate the input tree", () => {
   });
 
   expect(tree).toEqual(before);
+});
+
+test("ends non-empty output with exactly one newline", () => {
+  const output = renderAscii(tree);
+
+  expect(output.endsWith("\n")).toBe(true);
+  expect(output.endsWith("\n\n")).toBe(false);
 });
