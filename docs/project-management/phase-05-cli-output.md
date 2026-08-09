@@ -10,7 +10,61 @@ By the end of this phase, a user should be able to run TreeMark against a real d
 
 This phase turns the existing independently tested components into the first genuinely usable TreeMark prototype.
 
-This phase does not yet mutate sections inside existing Markdown files, manage TreeMark markers, or implement freshness checking.
+This phase does not yet mutate sections inside existing Markdown files, manage TreeMark markers, implement freshness checking, or create timestamped snapshot files.
+
+---
+
+## Locked Phase 5 Decisions
+
+### Output Destination
+
+- If `--output` is omitted, TreeMark writes the rendered tree to stdout.
+- If `--output` is provided without an explicit filename, TreeMark uses:
+
+```text
+structure-map.md
+```
+
+- If the user supplies a filename/path, TreeMark writes exactly to that target.
+
+Representative commands:
+
+```bash
+treemark ./docs
+treemark ./src --output
+treemark ./src --output architecture-tree.md
+treemark . --output reports/project-structure.md
+```
+
+### Overwrite Behavior
+
+For Phase 5:
+
+- Existing output files are replaced in full.
+- Output is never appended.
+- TreeMark does not prompt interactively before replacement.
+- TreeMark does not preserve old generated contents inside the same file.
+- Snapshot/timestamp mode is intentionally deferred.
+
+The long-term behavior should preserve room for a future option that creates timestamped historical snapshots instead of overwriting the canonical output file.
+
+Conceptually:
+
+```text
+stdout                  = temporary/viewable output
+--output                = canonical generated artifact
+future snapshot mode    = historical preserved artifact
+```
+
+### Default Output Filename
+
+The generalized default output filename is:
+
+```text
+structure-map.md
+```
+
+This name is intentionally not documentation-specific so TreeMark can describe application code, repositories, assets, configuration trees, documentation, or other directory structures.
 
 ---
 
@@ -32,9 +86,11 @@ This phase does not yet mutate sections inside existing Markdown files, manage T
 ### 5B — File Output / Hardening
 
 - Add or wire `--output` behavior.
+- Support the default output filename `structure-map.md`.
+- Support an explicitly supplied output filename/path.
 - Write rendered output to the requested file.
 - Exclude the output file from the generated tree when it falls inside the scan root.
-- Define overwrite behavior.
+- Replace existing output files in full.
 - Handle invalid or unwritable output targets cleanly.
 - Avoid partial or misleading success messages.
 - Verify stdout remains clean when output is redirected to a file.
@@ -47,6 +103,8 @@ This phase does not yet mutate sections inside existing Markdown files, manage T
 
 ```text
 src/
+├── cli.ts
+├── index.ts
 ├── cli/
 │   ├── run-cli.ts
 │   └── ...
@@ -95,6 +153,7 @@ It must not:
 - Mutate `TreeNode` values.
 - Contain README marker logic.
 - Perform `--check` freshness comparison.
+- Implement timestamped snapshot naming.
 
 ---
 
@@ -182,19 +241,40 @@ Diagnostic or error output should remain distinguishable from generated tree con
 
 ## File Output
 
+### Default Output Target
+
+If the user selects file output but does not provide a custom filename, use:
+
+```text
+structure-map.md
+```
+
 Representative command:
 
 ```bash
-treemark ./docs --output docs-map.md
+treemark ./docs --output
 ```
 
-Expected flow:
+Expected target:
 
 ```text
-scan ./docs
-→ render selected format
-→ write rendered string to docs-map.md
+./structure-map.md
 ```
+
+The default output target is resolved from the current working directory.
+
+### User-Named Output Target
+
+The user may provide a custom filename or path:
+
+```bash
+treemark ./docs --output docs-tree.md
+treemark ./src --output reports/source-structure.md
+```
+
+TreeMark should write exactly to the requested target.
+
+### Stored File Contents
 
 The stored file should contain exactly the renderer output.
 
@@ -217,26 +297,26 @@ If the requested output file is inside the scanned root, TreeMark must prevent t
 Example:
 
 ```bash
-treemark ./docs --output ./docs/docs-map.md
+treemark ./docs --output ./docs/structure-map.md
 ```
 
 The scanner should receive the corresponding normalized root-relative exclusion:
 
 ```text
-docs-map.md
+structure-map.md
 ```
 
 This should use the explicit exclusion mechanism built in Phase 3.
 
 The scanner should not need to know that the excluded path is an output target.
 
+This logic should also be designed so a future timestamped snapshot target can reuse the same exclusion pathway.
+
 ---
 
 ## Overwrite Behavior
 
-Phase 5 must explicitly lock file overwrite semantics.
-
-Recommended MVP behavior:
+Phase 5 behavior is locked:
 
 - If the output file does not exist, create it.
 - If the output file already exists, replace its entire contents.
@@ -244,9 +324,34 @@ Recommended MVP behavior:
 - Do not prompt interactively.
 - Do not partially preserve existing content.
 
-This behavior is appropriate for standalone generated output files.
+This behavior applies to the canonical standalone generated artifact.
 
-README section preservation belongs to Phase 6.
+Historical snapshots are a separate concern and are deferred.
+
+---
+
+## Future Snapshot Compatibility
+
+Phase 5 should avoid design choices that would make a future snapshot mode awkward.
+
+A future feature may support behavior conceptually similar to:
+
+```bash
+treemark . --output structure-map.md --snapshot
+```
+
+or another final CLI shape chosen later.
+
+That future mode may generate timestamped targets such as:
+
+```text
+structure-map-2026-08-09.md
+structure-map-2026-08-09T1202.md
+```
+
+The exact syntax, timestamp format, timezone semantics, collision handling, storage location, and retention policy are explicitly deferred.
+
+Phase 5 should only preserve architectural room for this capability.
 
 ---
 
@@ -258,6 +363,7 @@ During implementation, verify:
 
 - Relative output paths resolve from the current working directory.
 - Absolute output paths work.
+- The default `structure-map.md` target resolves predictably.
 - Parent-directory handling is explicit.
 - Output paths inside the scan root are converted correctly for explicit exclusion.
 - Output paths outside the scan root do not create unintended exclusions.
@@ -340,27 +446,28 @@ contains the exact expected renderer output.
 
 ### CLI Integration
 
-* [ ] Default command scans and renders Markdown.
-* [ ] ASCII format selects the ASCII renderer.
-* [ ] Unsupported format fails cleanly.
-* [ ] Scanner options reach `scanDirectory`.
-* [ ] Renderer options reach the selected renderer.
-* [ ] Root inclusion behavior works through the CLI.
-* [ ] Successful stdout output contains only rendered tree content.
-* [ ] Renderer output newline behavior is preserved.
+* [x] Default command scans and renders Markdown.
+* [x] ASCII format selects the ASCII renderer.
+* [x] Unsupported format fails cleanly.
+* [x] Scanner options reach `scanDirectory`.
+* [x] Renderer options reach the selected renderer.
+* [x] Root inclusion behavior works through the CLI.
+* [x] Successful stdout output contains only rendered tree content.
+* [x] Renderer output newline behavior is preserved.
 
 ### End-to-End Behavior
 
-* [ ] A real temporary directory can be scanned and rendered through the CLI.
-* [ ] Markdown output represents the real scanned hierarchy.
-* [ ] ASCII output represents the real scanned hierarchy.
-* [ ] Ignore patterns affect end-to-end output.
-* [ ] Maximum depth affects end-to-end output.
-* [ ] Symlink-skipping behavior remains intact through CLI integration.
+* [x] A real temporary directory can be scanned and rendered through the CLI.
+* [x] Markdown output represents the real scanned hierarchy.
+* [x] ASCII output represents the real scanned hierarchy.
+* [x] Ignore patterns affect end-to-end output.
+* [x] Maximum depth affects end-to-end output.
+* [x] Symlink-skipping behavior remains intact through CLI integration.
 
 ### File Output
 
-* [ ] `--output` creates a new file.
+* [ ] `--output` without a filename creates `structure-map.md`.
+* [ ] `--output <path>` uses the user-supplied filename/path.
 * [ ] Generated file contents exactly match renderer output.
 * [ ] Existing output file is replaced rather than appended.
 * [ ] Markdown can be written to a file.
@@ -369,6 +476,9 @@ contains the exact expected renderer output.
 * [ ] Output path outside the scan root has no unintended exclusion effect.
 * [ ] Writing to an invalid target fails cleanly.
 * [ ] Failed writes do not report success.
+* [ ] Markdown file links are relative to the output document location.
+* [ ] Markdown link paths use `/` on all platforms.
+* [ ] Link-disabled Markdown output uses plain file labels.
 
 ### Separation / Hardening
 
@@ -376,6 +486,8 @@ contains the exact expected renderer output.
 * [ ] CLI orchestration does not duplicate renderer logic.
 * [ ] File-output logic does not leak into the scanner.
 * [ ] File-output logic does not leak into renderers.
+* [ ] Snapshot/timestamp behavior is not implemented in Phase 5.
+* [ ] Current output-path design leaves room for future snapshot targets.
 * [ ] Stdout behavior is deterministic.
 * [ ] Repeated runs against unchanged input produce identical output.
 
@@ -385,31 +497,41 @@ contains the exact expected renderer output.
 
 ### 5A — CLI Rendering Pipeline
 
-* [ ] Review current CLI argument contract.
-* [ ] Wire root path into `scanDirectory`.
-* [ ] Wire scanner options into `scanDirectory`.
-* [ ] Add renderer-selection orchestration.
-* [ ] Make Markdown the default renderer.
-* [ ] Wire ASCII format selection.
-* [ ] Wire optional root inclusion.
-* [ ] Print rendered output to stdout.
-* [ ] Add CLI integration tests.
-* [ ] Add real-directory end-to-end tests.
-* [ ] Run `npm run check`.
+* [x] Review current CLI argument contract.
+* [x] Wire root path into `scanDirectory`.
+* [x] Wire scanner options into `scanDirectory`.
+* [x] Add renderer-selection orchestration.
+* [x] Make Markdown the default renderer.
+* [x] Wire ASCII format selection.
+* [x] Wire optional root inclusion.
+* [x] Print rendered output to stdout.
+* [x] Add CLI integration tests.
+* [x] Add real-directory end-to-end tests.
+* [x] Run `npm run check`.
 
 ### 5B — File Output / Hardening
 
+* [ ] Lock default output filename as `structure-map.md`.
 * [ ] Lock overwrite behavior.
-* [ ] Wire `--output` argument.
-* [ ] Resolve output path correctly.
+* [ ] Wire `--output` with optional filename/path.
+* [ ] Use `structure-map.md` when file output is requested without a custom target.
+* [ ] Resolve user-supplied output paths correctly.
 * [ ] Convert in-root output target to explicit scanner exclusion.
 * [ ] Write rendered output to file.
+* [ ] Complete MVP Markdown link behavior for generated files.
+* [ ] Resolve Markdown links relative to the directory containing the output file.
+* [ ] Support plain file labels when links are disabled.
+* [ ] Add Markdown link/path tests for output files.
+* [ ] Replace existing output file contents in full.
 * [ ] Ensure successful file output does not duplicate tree content to stdout.
 * [ ] Add temporary-directory file-output tests.
+* [ ] Add default-filename test.
+* [ ] Add custom-filename test.
 * [ ] Add overwrite test.
 * [ ] Add self-exclusion test.
 * [ ] Add invalid-output error tests.
 * [ ] Review orchestration boundaries.
+* [ ] Review future snapshot compatibility.
 * [ ] Verify all OS/Node CI jobs.
 * [ ] Run final `npm run check`.
 
@@ -424,15 +546,18 @@ Phase 5 is complete when:
 3. Renderer selection is controlled by the CLI without duplicating renderer logic.
 4. Scanner options continue to work through the end-to-end CLI pipeline.
 5. Optional root inclusion works through the CLI.
-6. `--output` writes the rendered tree to a standalone file.
-7. Existing generated output files are safely replaced.
-8. An output file inside the scan root does not include itself.
-9. Successful stdout output remains clean and pipe-friendly.
-10. Operational failures return exit code `1`.
-11. No Phase 6 README marker/update logic has leaked into Phase 5.
-12. Unit and end-to-end tests pass.
-13. All GitHub Actions matrix jobs pass.
-14. `git status` is clean after the final commit.
+6. `--output` without a custom filename writes to `structure-map.md`.
+7. `--output <path>` writes to the user-supplied target.
+8. Existing generated output files are safely replaced.
+9. An output file inside the scan root does not include itself.
+10. Successful stdout output remains clean and pipe-friendly.
+11. Operational failures return exit code `1`.
+12. Snapshot/timestamp output remains deferred but is not blocked by Phase 5 architecture.
+13. No Phase 6 README marker/update logic has leaked into Phase 5.
+14. Markdown output files use correct destination-relative links, with plain labels available when links are disabled.
+15. Unit and end-to-end tests pass.
+16. All GitHub Actions matrix jobs pass.
+17. `git status` is clean after the final commit.
 
 ---
 
@@ -440,6 +565,11 @@ Phase 5 is complete when:
 
 Do not implement during Phase 5:
 
+- Timestamped snapshot output.
+- Snapshot naming syntax.
+- Snapshot timezone behavior.
+- Snapshot collision handling.
+- Snapshot retention/cleanup policy.
 - README marker parsing.
 - README section replacement.
 - `--update`.

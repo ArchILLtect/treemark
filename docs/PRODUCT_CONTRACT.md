@@ -96,7 +96,8 @@ treemark <root> [options]
 
 ```text
 -f, --format <format>       markdown | ascii
--o, --output <file>         Write a complete generated document
+-o, --output [file]         Write a complete generated file
+                            Default: structure-map.md
 -u, --update <file>         Update a marked section in an existing Markdown file
 -i, --ignore <pattern>      Ignore a root-relative glob; repeatable
 -d, --max-depth <number>    Maximum descendant depth
@@ -109,6 +110,7 @@ treemark <root> [options]
 
 ### Default behavior
 
+- `--output` without a supplied file writes to `structure-map.md` in the current working directory.
 - Default format: `markdown`.
 - No output/update target: write generated content to stdout.
 - Informational and error messages: stderr.
