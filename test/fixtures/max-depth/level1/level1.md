@@ -1,0 +1,1 @@
+# This file is used to test the max depth option. It is located in the level1 directory, which is a subdirectory of the max-depth directory. The max depth option is used to limit the depth of the directory tree that is processed by the program.

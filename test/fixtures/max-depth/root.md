@@ -1,0 +1,1 @@
+# This file is used as the root of the test fixture for the max-depth rule. It is not intended to be linted.
