@@ -25,3 +25,15 @@ The format is based on Keep a Changelog, and the project will use Semantic Versi
 - ASCII tree renderer with nested branch connectors and optional root inclusion.
 - Deterministic renderer newline behavior and non-mutating renderer guarantees.
 - Cross-renderer tests confirming Markdown and ASCII output can share the same `TreeNode` hierarchy.
+- End-to-end CLI pipeline connecting argument parsing, directory scanning, renderer selection, and stdout output.
+- CLI support for Markdown and ASCII format selection, repeatable ignore patterns, maximum depth, and optional root inclusion.
+- Standalone file output with `--output`, including the default `structure-map.md` filename and custom output paths.
+- Automatic exclusion of in-root output files so generated structure maps do not include themselves.
+- Full-file overwrite behavior for generated output artifacts.
+- Markdown directory formatting with bold directory labels and destination-relative file links.
+- `--no-links` support for plain Markdown file labels.
+- Deterministic output-file path handling across Windows, macOS, and Linux.
+- CLI and filesystem error normalization with concise user-facing messages and operational exit code `1`.
+- Context-specific validation for missing roots, missing output directories, and directory-valued output targets.
+- Expanded scanner hardening tests for repeated-scan determinism, file ignores, multiple ignore patterns, symlinked files, outside-root exclusions, and traversal error path context.
+- End-to-end file-output coverage for Markdown, ASCII, overwrite behavior, self-exclusion, default and custom filenames, outside-root outputs, deterministic repeated runs, and invalid output targets.
