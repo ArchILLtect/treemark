@@ -332,9 +332,9 @@ filesystem fixtures.
 * [x] Add explicit exclusion support.
 * [x] Add filtering fixtures/tests.
 * [x] Add filesystem error tests.
-* [ ] Verify all OS/Node CI jobs.
-* [ ] Review code for renderer leakage.
-* [ ] Run final `npm run check`.
+* [x] Verify all OS/Node CI jobs.
+* [x] Review code for renderer leakage.
+* [x] Run final `npm run check`.
 
 ---
 
