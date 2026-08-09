@@ -8,6 +8,7 @@ import {
 } from "node:path";
 import { writeFile } from "node:fs/promises";
 import { scanDirectory } from "../scan/scan-directory.js";
+import { validateOutputTarget } from "./validate-output-target.js";
 import { renderAscii } from "../render/render-ascii.js";
 import { renderMarkdown } from "../render/render-markdown.js";
 import { normalizeRelativePath } from "../scan/normalize-relative-path.js";
@@ -182,6 +183,8 @@ export async function runCli(argv: string[]): Promise<void> {
         });
 
   if (resolvedOutputPath !== undefined) {
+    await validateOutputTarget(resolvedOutputPath);
+
     await writeFile(
       resolvedOutputPath,
       output,
