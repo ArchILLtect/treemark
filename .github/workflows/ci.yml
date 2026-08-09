@@ -35,8 +35,7 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
 
-      - name: Install dependencies
-        # Bootstrap only: change this to `npm ci` after package-lock.json is committed.
+      - name: Install locked dependencies
         run: npm ci
 
       - name: Run project checks
