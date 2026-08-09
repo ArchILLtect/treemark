@@ -348,45 +348,45 @@ Additional cases should cover:
 
 ### Markdown Renderer
 
-* [ ] Root rendering behavior is explicit.
-* [ ] Direct files render correctly.
-* [ ] Direct directories render correctly.
-* [ ] Nested directories use correct indentation.
-* [ ] Nested files render correctly.
-* [ ] Directory names use the chosen visual convention.
-* [ ] Empty directories render correctly.
-* [ ] Scanner child ordering is preserved.
-* [ ] Output is deterministic.
-* [ ] Newline behavior is deterministic.
+* [x] Root rendering behavior is explicit.
+* [x] Direct files render correctly.
+* [x] Direct directories render correctly.
+* [x] Nested directories use correct indentation.
+* [x] Nested files render correctly.
+* [x] Directory names use the chosen visual convention.
+* [x] Empty directories render correctly.
+* [x] Scanner child ordering is preserved.
+* [x] Output is deterministic.
+* [x] Newline behavior is deterministic.
 
 ### ASCII Renderer
 
-* [ ] Root rendering behavior is explicit.
-* [ ] Direct files render correctly.
-* [ ] Direct directories render correctly.
-* [ ] Intermediate siblings use `├──`.
-* [ ] Final siblings use `└──`.
-* [ ] Deep nesting preserves ancestor branch guides.
-* [ ] Empty directories render correctly.
-* [ ] Scanner child ordering is preserved.
-* [ ] Output is deterministic.
-* [ ] Newline behavior is deterministic.
+* [x] Root rendering behavior is explicit.
+* [x] Direct files render correctly.
+* [x] Direct directories render correctly.
+* [x] Intermediate siblings use `├──`.
+* [x] Final siblings use `└──`.
+* [x] Deep nesting preserves ancestor branch guides.
+* [x] Empty directories render correctly.
+* [x] Scanner child ordering is preserved.
+* [x] Output is deterministic.
+* [x] Newline behavior is deterministic.
 
 ### Renderer Isolation
 
-* [ ] Renderers do not access the filesystem.
-* [ ] Renderers do not apply ignore/exclusion logic.
-* [ ] Renderers do not sort or reorder children.
-* [ ] Renderers do not mutate the input `TreeNode`.
-* [ ] Markdown-specific syntax does not leak into the scanner/model.
-* [ ] ASCII-specific syntax does not leak into the scanner/model.
+* [x] Renderers do not access the filesystem.
+* [x] Renderers do not apply ignore/exclusion logic.
+* [x] Renderers do not sort or reorder children.
+* [x] Renderers do not mutate the input `TreeNode`.
+* [x] Markdown-specific syntax does not leak into the scanner/model.
+* [x] ASCII-specific syntax does not leak into the scanner/model.
 
 ### Cross-Renderer
 
-* [ ] The same `TreeNode` can be rendered as Markdown.
-* [ ] The same `TreeNode` can be rendered as ASCII.
-* [ ] Both renderers represent the same hierarchy.
-* [ ] Renderer selection does not alter the input tree.
+* [x] The same `TreeNode` can be rendered as Markdown.
+* [x] The same `TreeNode` can be rendered as ASCII.
+* [x] Both renderers represent the same hierarchy.
+* [x] Renderer selection does not alter the input tree.
 
 ---
 
