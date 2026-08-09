@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { runCli } from "./run-cli.js";
+import { runCli } from "./cli/run-cli.js";
 
 try {
   runCli(process.argv);

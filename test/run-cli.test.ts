@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { createProgram } from "../src/run-cli.js";
+import { createProgram } from "../src/cli/run-cli.js";
 
 describe("TreeMark CLI", () => {
   test("defines the expected command name", () => {
