@@ -37,3 +37,13 @@ The format is based on Keep a Changelog, and the project will use Semantic Versi
 - Context-specific validation for missing roots, missing output directories, and directory-valued output targets.
 - Expanded scanner hardening tests for repeated-scan determinism, file ignores, multiple ignore patterns, symlinked files, outside-root exclusions, and traversal error path context.
 - End-to-end file-output coverage for Markdown, ASCII, overwrite behavior, self-exclusion, default and custom filenames, outside-root outputs, deterministic repeated runs, and invalid output targets.
+- Canonical TreeMark synchronization markers and generated-content ownership notice.
+- Pure marked-section replacement for existing Markdown documents, preserving all content outside the managed region.
+- Strict synchronization marker validation requiring exactly one start/end pair in the correct order.
+- Full-line marker safety rules requiring markers to be the only non-whitespace content on their lines.
+- LF and CRLF-aware marked-region replacement with deterministic newline handling.
+- Markdown synchronized-region composition with a generated-content notice.
+- ASCII synchronized-region composition using fenced `text` blocks while keeping the ASCII renderer Markdown-unaware.
+- Deterministic empty-region and repeated-replacement behavior for synchronized content.
+- Focused synchronization tests covering missing, duplicate, reversed, inline, and whitespace-surrounded markers.
+- Deferred-feature tracking for intentionally postponed TreeMark capabilities and future safety enhancements.

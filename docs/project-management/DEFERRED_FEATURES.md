@@ -125,7 +125,46 @@ Status: Deferred post-MVP.
 
 ### Custom marker strings
 
-Allow users to configure marker names or marker syntax.
+Allow users to configure marker names or marker syntax instead of requiring
+TreeMark's default markers:
+
+```html
+<!-- treemark:start -->
+<!-- treemark:end -->
+```
+
+Potential uses include:
+
+* Matching an existing project's documentation conventions.
+* Avoiding naming collisions with other tools.
+* Using more descriptive marker names for specialized generated sections.
+* Supporting multiple separately managed structure-map regions in the same
+  document when combined with future named-region support.
+
+Example future markers might look like:
+
+```html
+<!-- treemark:docs:start -->
+<!-- treemark:docs:end -->
+
+<!-- treemark:src:start -->
+<!-- treemark:src:end -->
+```
+
+or user-defined alternatives such as:
+
+```html
+<!-- docs-tree:start -->
+<!-- docs-tree:end -->
+```
+
+Open decisions:
+
+* Whether customization belongs in CLI flags, configuration files, or both.
+* Whether custom marker names should identify distinct managed regions.
+* Validation rules for marker names.
+* How custom markers interact with future multiple-region support.
+* Whether default TreeMark markers remain reserved.
 
 Status: Deferred post-MVP.
 
@@ -177,6 +216,41 @@ Status: Deferred post-MVP.
 ### Interactive prompts
 
 Interactive configuration or guided command flows.
+
+Status: Deferred post-MVP.
+
+---
+
+## Safety and Security Features
+
+### Update-target backups
+
+Optionally preserve previous versions of user-authored files modified by
+`--update`.
+
+This is separate from generated structure snapshots. Structure snapshots
+preserve historical TreeMark output artifacts; update-target backups preserve
+the original host document before TreeMark modifies its managed region.
+
+Potential approaches:
+
+- Single rolling backup:
+  `README.md.treemark.bak`
+- Fixed backup rotation:
+  `README.md.treemark.bak.1`
+  `README.md.treemark.bak.2`
+  `README.md.treemark.bak.3`
+- Time-based backup retention.
+
+Open decisions:
+
+- Whether backups are enabled by default or opt-in.
+- Maximum backup count.
+- Rotation vs TTL retention.
+- Backup naming convention.
+- Whether unchanged updates create backups.
+- Cleanup behavior.
+- Interaction with Git-managed files.
 
 Status: Deferred post-MVP.
 
