@@ -26,5 +26,7 @@ test("rejects when directory traversal fails", async () => {
 
   await expect(
     scanDirectory(process.cwd()),
-  ).rejects.toThrow("Simulated filesystem failure");
+  ).rejects.toThrow(
+    `failed to read directory "${process.cwd()}": Simulated filesystem failure`,
+  );
 });

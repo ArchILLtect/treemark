@@ -321,3 +321,126 @@ test("excludes only exact root-relative paths", async () => {
     tree.children?.some((child) => child.name === "overview.md"),
   ).toBe(true);
 });
+
+// Deterministic repeated ordering test
+
+test("produces identical ordering across repeated scans", async () => {
+  const rootPath = join(fixturesRoot, "sorting");
+
+  const first = await scanDirectory(rootPath);
+  const second = await scanDirectory(rootPath);
+
+  expect(second).toEqual(first);
+});
+
+// Ignored files tests
+
+// Single ignored file test
+
+test("excludes a single ignored file", async () => {
+  const tree = await scanDirectory(
+    join(fixturesRoot, "filtering"),
+    {
+      ignorePatterns: ["overview.md"],
+    },
+  );
+
+  expect(
+    tree.children?.some(
+      (child) => child.name === "overview.md",
+    ),
+  ).toBe(false);
+});
+
+// Multiple ignored files test
+
+test("applies multiple ignore patterns together", async () => {
+  const tree = await scanDirectory(
+    join(fixturesRoot, "filtering"),
+    {
+      ignorePatterns: [
+        "drafts/**",
+        "overview.md",
+      ],
+    },
+  );
+
+  expect(tree.children?.map((child) => child.name)).toEqual([
+    "guides",
+  ]);
+});
+
+// Outside root ignored files test
+
+test("ignores exclusions that do not match root-relative paths", async () => {
+  const tree = await scanDirectory(
+    join(fixturesRoot, "filtering"),
+    {
+      excludedPaths: [
+        "../overview.md",
+        "outside/keep.md",
+      ],
+    },
+  );
+
+  expect(tree.children?.map((child) => child.name)).toEqual([
+    "drafts",
+    "guides",
+    "overview.md",
+  ]);
+});
+
+// Direct file-symlink test
+
+test("skips symlinked files", async () => {
+  const tempRoot = await mkdtemp(
+    join(tmpdir(), "treemark-file-symlink-"),
+  );
+
+  const targetPath = join(
+    tempRoot,
+    "target.md",
+  );
+
+  const symlinkPath = join(
+    tempRoot,
+    "linked.md",
+  );
+
+  try {
+    await writeFile(
+      targetPath,
+      "target",
+    );
+
+    try {
+      await symlink(
+        targetPath,
+        symlinkPath,
+        "file",
+      );
+    } catch (error: unknown) {
+      if (
+        process.platform === "win32" &&
+        error instanceof Error &&
+        "code" in error &&
+        error.code === "EPERM"
+      ) {
+        return;
+      }
+
+      throw error;
+    }
+
+    const tree = await scanDirectory(tempRoot);
+
+    expect(tree.children?.map((child) => child.name)).toEqual([
+      "target.md",
+    ]);
+  } finally {
+    await rm(tempRoot, {
+      recursive: true,
+      force: true,
+    });
+  }
+});

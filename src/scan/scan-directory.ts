@@ -75,11 +75,24 @@ async function scanDirectoryNode(
     };
   }
 
-  const entries = sortEntries(
-    await readdir(currentPath, {
-      withFileTypes: true,
-    }),
-  );
+  let entries;
+
+  try {
+    entries = sortEntries(
+      await readdir(currentPath, {
+        withFileTypes: true,
+      }),
+    );
+  } catch (error: unknown) {
+    const message =
+      error instanceof Error
+        ? error.message
+        : String(error);
+
+    throw new Error(
+      `failed to read directory "${currentPath}": ${message}`,
+    );
+  }
 
   const children: TreeNode[] = [];
 

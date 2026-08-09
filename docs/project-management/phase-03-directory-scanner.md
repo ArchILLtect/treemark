@@ -1,6 +1,6 @@
 # Phase 3 — Directory Scanner
 
-Status: **Planned**
+Status: **Complete**
 
 ## Goal
 
@@ -246,64 +246,60 @@ filesystem fixtures.
 
 ### Root Validation
 
-* [ ] Existing directory succeeds.
-* [ ] Missing root fails.
-* [ ] File supplied as root fails.
+* [x] Existing directory succeeds.
+* [x] Missing root fails.
+* [x] File supplied as root fails.
 
 ### Basic Traversal
 
-* [ ] Empty directory produces a valid root node.
-* [ ] Direct files are discovered.
-* [ ] Nested directories are discovered.
-* [ ] Nested files receive correct relative paths.
+* [x] Empty directory produces a valid root node.
+* [x] Direct files are discovered.
+* [x] Nested directories are discovered.
+* [x] Nested files receive correct relative paths.
 
 ### Sorting
 
-* [ ] Directories appear before files.
-* [ ] Alphabetical ordering is stable.
-* [ ] `guide2.md` appears before `guide10.md`.
-* [ ] Case-tie behavior is deterministic.
-* [ ] Repeated scans produce identical ordering.
+* [x] Directories appear before files.
+* [x] Alphabetical ordering is stable.
+* [x] `guide2.md` appears before `guide10.md`.
+* [x] Case-tie behavior is deterministic.
+* [x] Repeated scans produce identical ordering.
 
 ### Paths
 
-* [ ] Root-relative paths are correct.
-* [ ] Stored paths use `/`.
-* [ ] Behavior is correct on Windows CI.
-* [ ] Behavior is correct on macOS CI.
-* [ ] Behavior is correct on Linux CI.
+* [x] Root-relative paths are correct.
+* [x] Stored paths use `/`.
+* [x] Behavior is correct on Windows CI.
+* [x] Behavior is correct on macOS CI.
+* [x] Behavior is correct on Linux CI.
 
 ### Maximum Depth
 
-* [ ] Depth `0` behaves correctly.
-* [ ] Depth `1` behaves correctly.
-* [ ] Depth `2` behaves correctly.
-* [ ] Entries beyond maximum depth are not traversed.
+* [x] Depth `0` behaves correctly.
+* [x] Depth `1` behaves correctly.
+* [x] Depth `2` behaves correctly.
+* [x] Entries beyond maximum depth are not traversed.
 
 ### Ignore Patterns
-
-* [ ] Single ignored file is excluded.
-* [ ] Single ignored directory is excluded.
-* [ ] Multiple patterns work together.
-* [ ] Glob patterns operate on normalized paths.
-* [ ] `.git` is ignored by default.
-* [ ] `node_modules` is ignored by default.
+* [x] Single ignored file is excluded.
+* [x] Single ignored directory is excluded.
+* [x] Multiple patterns work together.
+* [x] Glob patterns operate on normalized paths.
+* [x] `.git` is ignored by default.
+* [x] `node_modules` is ignored by default.
 
 ### Symlinks
-
-* [ ] Symlinked file is skipped.
-* [ ] Symlinked directory is not traversed.
-* [ ] Symlink behavior cannot cause traversal cycles.
+* [x] Symlinked file is skipped.
+* [x] Symlinked directory is not traversed.
+* [x] Symlink behavior cannot cause traversal cycles.
 
 ### Explicit Exclusions
-
-* [ ] Explicitly excluded file does not appear.
-* [ ] Exclusion outside the root has no unintended effect.
+* [x] Explicitly excluded file does not appear.
+* [x] Exclusion outside the root has no unintended effect.
 
 ### Errors
-
-* [ ] Unexpected filesystem failure aborts the scan.
-* [ ] Errors identify the relevant path.
+* [x] Unexpected filesystem failure aborts the scan.
+* [x] Errors identify the relevant path.
 
 ---
 
