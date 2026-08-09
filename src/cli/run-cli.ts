@@ -1,7 +1,16 @@
 import { Command, InvalidArgumentError } from "commander";
+import {
+  dirname,
+  isAbsolute,
+  relative,
+  resolve,
+  sep,
+} from "node:path";
+import { writeFile } from "node:fs/promises";
 import { scanDirectory } from "../scan/scan-directory.js";
 import { renderAscii } from "../render/render-ascii.js";
 import { renderMarkdown } from "../render/render-markdown.js";
+import { normalizeRelativePath } from "../scan/normalize-relative-path.js";
 
 const DEVELOPMENT_VERSION = "0.0.0-development";
 
@@ -21,7 +30,7 @@ function collect(value: string, previous: string[]): string[] {
 
 export interface CliOptions {
   format: string;
-  output?: string;
+  output?: string | boolean;
   update?: string;
   ignore: string[];
   maxDepth?: number;
@@ -45,7 +54,10 @@ export function createProgram(): Command {
       "output format: markdown or ascii",
       "markdown",
     )
-    .option("-o, --output <file>", "write a complete generated document")
+    .option(
+      "-o, --output [file]",
+      "write a complete generated file",
+    )
     .option(
       "-u, --update <file>",
       "update a TreeMark-marked section in an existing Markdown file",
@@ -70,7 +82,8 @@ export function createProgram(): Command {
       Examples:
         $ treemark ./docs
         $ treemark ./docs --format ascii
-        $ treemark ./docs --output docs/docs-map.md
+        $ treemark ./docs --output
+        $ treemark ./docs --output structure-map.md
         $ treemark ./docs --update README.md
         $ treemark ./docs --update README.md --check
       `,
@@ -85,6 +98,17 @@ export async function runCli(argv: string[]): Promise<void> {
 
   const root = program.args[0];
   const options = program.opts<CliOptions>();
+
+  const outputTarget =
+    options.output === true
+      ? "structure-map.md"
+      : options.output;
+
+  const resolvedOutputPath =
+    typeof outputTarget === "string"
+      ? resolve(outputTarget)
+      : undefined;
+
 
   if (options.format !== "markdown" && options.format !== "ascii") {
     throw new Error(
@@ -108,21 +132,62 @@ export async function runCli(argv: string[]): Promise<void> {
     throw new Error("missing root path");
   }
 
+  const resolvedRootPath = resolve(root);
+
+  const relativeOutputPath =
+    resolvedOutputPath !== undefined
+      ? relative(resolvedRootPath, resolvedOutputPath)
+      : undefined;
+
+  const outputExclusion =
+    relativeOutputPath !== undefined &&
+    relativeOutputPath !== "" &&
+    relativeOutputPath !== ".." &&
+    !relativeOutputPath.startsWith(`..${sep}`) &&
+    !isAbsolute(relativeOutputPath)
+      ? normalizeRelativePath(relativeOutputPath)
+      : undefined;
+
+  const markdownLinkBasePath =
+    resolvedOutputPath !== undefined
+      ? normalizeRelativePath(
+          relative(
+            dirname(resolvedOutputPath),
+            resolvedRootPath,
+          ),
+        )
+      : undefined;
+
   const tree = await scanDirectory(root, {
     ignorePatterns: options.ignore,
     ...(options.maxDepth !== undefined
       ? { maxDepth: options.maxDepth }
       : {}),
+    ...(outputExclusion !== undefined
+      ? { excludedPaths: [outputExclusion] }
+      : {}),
   });
-
-  const renderOptions = {
-    includeRoot: options.includeRoot,
-  };
 
   const output =
     options.format === "ascii"
-      ? renderAscii(tree, renderOptions)
-      : renderMarkdown(tree, renderOptions);
+      ? renderAscii(tree, {
+          includeRoot: options.includeRoot,
+        })
+      : renderMarkdown(tree, {
+          includeRoot: options.includeRoot,
+          links: options.links,
+          ...(markdownLinkBasePath !== undefined
+            ? { linkBasePath: markdownLinkBasePath }
+            : {}),
+        });
 
-  process.stdout.write(output);
+  if (resolvedOutputPath !== undefined) {
+    await writeFile(
+      resolvedOutputPath,
+      output,
+      "utf8",
+    );
+  } else {
+    process.stdout.write(output);
+  }
 }
