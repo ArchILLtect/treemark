@@ -30,7 +30,7 @@ const tree: TreeNode = {
 
 test("omits the root node by default", () => {
   expect(renderMarkdown(tree)).toBe(
-    "- architecture/\n" +
+    "- **architecture/**\n" +
       "  - overview.md\n" +
       "- getting-started.md\n",
   );
@@ -42,8 +42,8 @@ test("includes the root node when requested", () => {
       includeRoot: true,
     }),
   ).toBe(
-    "- docs/\n" +
-      "  - architecture/\n" +
+    "- **docs/**\n" +
+      "  - **architecture/**\n" +
       "    - overview.md\n" +
       "  - getting-started.md\n",
   );
@@ -76,7 +76,7 @@ test("renders empty nested directories", () => {
   };
 
   expect(renderMarkdown(treeWithEmptyDirectory)).toBe(
-    "- drafts/\n",
+    "- **drafts/**\n",
   );
 });
 
@@ -127,4 +127,42 @@ test("does not mutate the input tree", () => {
   });
 
   expect(tree).toEqual(before);
+});
+
+test("renders file links when enabled with a link base path", () => {
+  expect(
+    renderMarkdown(tree, {
+      links: true,
+      linkBasePath: "../docs",
+    }),
+  ).toBe(
+    "- **architecture/**\n" +
+      "  - [overview.md](../docs/architecture/overview.md)\n" +
+      "- [getting-started.md](../docs/getting-started.md)\n",
+  );
+});
+
+test("renders plain file labels when links are disabled", () => {
+  expect(
+    renderMarkdown(tree, {
+      links: false,
+      linkBasePath: "../docs",
+    }),
+  ).toBe(
+    "- **architecture/**\n" +
+      "  - overview.md\n" +
+      "- getting-started.md\n",
+  );
+});
+
+test("renders plain file labels when no link base path is provided", () => {
+  expect(
+    renderMarkdown(tree, {
+      links: true,
+    }),
+  ).toBe(
+    "- **architecture/**\n" +
+      "  - overview.md\n" +
+      "- getting-started.md\n",
+  );
 });

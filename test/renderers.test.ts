@@ -46,7 +46,7 @@ test("renderer selection does not alter the input tree", () => {
 
 test("both renderers represent the same hierarchy", () => {
   expect(renderMarkdown(tree)).toBe(
-    "- guides/\n" +
+    "- **guides/**\n" +
       "  - setup.md\n",
   );
 
