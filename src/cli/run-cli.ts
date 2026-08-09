@@ -1,4 +1,7 @@
 import { Command, InvalidArgumentError } from "commander";
+import { scanDirectory } from "../scan/scan-directory.js";
+import { renderAscii } from "../render/render-ascii.js";
+import { renderMarkdown } from "../render/render-markdown.js";
 
 const DEVELOPMENT_VERSION = "0.0.0-development";
 
@@ -64,19 +67,19 @@ export function createProgram(): Command {
     .addHelpText(
       "after",
       `
-Examples:
-  $ treemark ./docs
-  $ treemark ./docs --format ascii
-  $ treemark ./docs --output docs/docs-map.md
-  $ treemark ./docs --update README.md
-  $ treemark ./docs --update README.md --check
-`,
+      Examples:
+        $ treemark ./docs
+        $ treemark ./docs --format ascii
+        $ treemark ./docs --output docs/docs-map.md
+        $ treemark ./docs --update README.md
+        $ treemark ./docs --update README.md --check
+      `,
     );
 
   return program;
 }
 
-export function runCli(argv: string[]): void {
+export async function runCli(argv: string[]): Promise<void> {
   const program = createProgram();
   program.parse(argv);
 
@@ -101,16 +104,25 @@ export function runCli(argv: string[]): void {
     throw new Error("--check requires --output or --update");
   }
 
-  // Phase 2 proves packaging and argument parsing only.
-  // Phase 3 will replace this message with the scanner pipeline.
-  console.log(
-    JSON.stringify(
-      {
-        root,
-        options,
-      },
-      null,
-      2,
-    ),
-  );
+  if (root === undefined) {
+    throw new Error("missing root path");
+  }
+
+  const tree = await scanDirectory(root, {
+    ignorePatterns: options.ignore,
+    ...(options.maxDepth !== undefined
+      ? { maxDepth: options.maxDepth }
+      : {}),
+  });
+
+  const renderOptions = {
+    includeRoot: options.includeRoot,
+  };
+
+  const output =
+    options.format === "ascii"
+      ? renderAscii(tree, renderOptions)
+      : renderMarkdown(tree, renderOptions);
+
+  process.stdout.write(output);
 }

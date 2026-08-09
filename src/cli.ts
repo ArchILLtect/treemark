@@ -3,7 +3,7 @@
 import { runCli } from "./cli/run-cli.js";
 
 try {
-  runCli(process.argv);
+  await runCli(process.argv);
 } catch (error: unknown) {
   const message = error instanceof Error ? error.message : String(error);
   console.error(`TreeMark: ${message}`);
