@@ -16,7 +16,7 @@ Phase documents describe how that contract is implemented.
 | 1 | Product contract | ✅ Complete |
 | 2 | Repository setup | ✅ Complete |
 | 3 | Directory scanner | ✅ Complete |
-| 4 | Renderers | ⬜ Planned |
+| 4 | Renderers | ✅ Complete |
 | 5 | File output | ⬜ Planned |
 | 6 | Markdown synchronization | ⬜ Planned |
 | 7 | Check mode | ⬜ Planned |
