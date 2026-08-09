@@ -2,7 +2,6 @@ import { expect, test } from "vitest";
 
 import { renderAscii } from "../src/render/render-ascii.js";
 import type { TreeNode } from "../src/types.js";
-import { renderMarkdown } from "../src/render/render-markdown.js";
 
 const tree: TreeNode = {
   name: "docs",
