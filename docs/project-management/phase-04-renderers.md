@@ -394,29 +394,29 @@ Additional cases should cover:
 
 ### 4A — Markdown Renderer
 
-* [ ] Lock root-node rendering behavior.
-* [ ] Lock newline behavior.
-* [ ] Add Markdown renderer file.
-* [ ] Implement directory display convention.
-* [ ] Implement nested-list rendering.
-* [ ] Handle empty directories.
-* [ ] Add synthetic renderer fixtures/helpers if useful.
-* [ ] Add Markdown renderer tests.
-* [ ] Verify input tree is not mutated.
-* [ ] Run `npm run check`.
+* [x] Lock root-node rendering behavior.
+* [x] Lock newline behavior.
+* [x] Add Markdown renderer file.
+* [x] Implement directory display convention.
+* [x] Implement nested-list rendering.
+* [x] Handle empty directories.
+* [x] Add synthetic renderer fixtures/helpers if useful.
+* [x] Add Markdown renderer tests.
+* [x] Verify input tree is not mutated.
+* [x] Run `npm run check`.
 
 ### 4B — ASCII Renderer / Hardening
 
-* [ ] Add ASCII renderer file.
-* [ ] Implement sibling connector selection.
-* [ ] Implement nested branch-prefix handling.
-* [ ] Handle empty directories.
-* [ ] Add ASCII renderer tests.
-* [ ] Add cross-renderer tests.
-* [ ] Verify scanner ordering is preserved.
-* [ ] Verify renderer/model separation.
-* [ ] Verify all OS/Node CI jobs.
-* [ ] Run final `npm run check`.
+* [x] Add ASCII renderer file.
+* [x] Implement sibling connector selection.
+* [x] Implement nested branch-prefix handling.
+* [x] Handle empty directories.
+* [x] Add ASCII renderer tests.
+* [x] Add cross-renderer tests.
+* [x] Verify scanner ordering is preserved.
+* [x] Verify renderer/model separation.
+* [x] Verify all OS/Node CI jobs.
+* [x] Run final `npm run check`.
 
 ---
 
