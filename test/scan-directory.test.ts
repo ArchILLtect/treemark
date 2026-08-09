@@ -37,7 +37,9 @@ test("rejects a file as the root", async () => {
     validateRoot(
       join(fixturesRoot, "basic-tree", "getting-started.md"),
     ),
-  ).rejects.toThrow("Root path is not a directory");
+  ).rejects.toThrow(
+    "root path is not a directory:",
+  );
 });
 
 // Basic traversal test

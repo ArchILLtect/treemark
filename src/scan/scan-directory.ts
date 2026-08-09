@@ -6,11 +6,31 @@ import { sortEntries } from "./sort-entries.js";
 import { DEFAULT_IGNORE_PATTERNS } from "./default-ignore-patterns.js";
 import { shouldIgnore } from "./should-ignore.js";
 
-export async function validateRoot(rootPath: string): Promise<void> {
-  const stats = await stat(rootPath);
+export async function validateRoot(
+  rootPath: string,
+): Promise<void> {
+  let stats;
+
+  try {
+    stats = await stat(rootPath);
+  } catch (error: unknown) {
+    if (
+      error instanceof Error &&
+      "code" in error &&
+      error.code === "ENOENT"
+    ) {
+      throw new Error(
+        `root directory does not exist: ${rootPath}`,
+      );
+    }
+
+    throw error;
+  }
 
   if (!stats.isDirectory()) {
-    throw new Error(`Root path is not a directory: ${rootPath}`);
+    throw new Error(
+      `root path is not a directory: ${rootPath}`,
+    );
   }
 }
 
