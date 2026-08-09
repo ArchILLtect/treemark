@@ -532,8 +532,8 @@ contains the exact expected renderer output.
 * [x] Add invalid-output error tests.
 * [x] Review orchestration boundaries.
 * [x] Review future snapshot compatibility.
-* [ ] Verify all OS/Node CI jobs.
-* [ ] Run final `npm run check`.
+* [x] Verify all OS/Node CI jobs.
+* [x] Run final `npm run check`.
 
 ---
 
