@@ -118,6 +118,7 @@ describe("TreeMark CLI", () => {
       tree,
       {
         includeRoot: false,
+        links: true,
       },
     );
 
@@ -199,6 +200,7 @@ describe("TreeMark CLI", () => {
       tree,
       {
         includeRoot: true,
+        links: true,
       },
     );
   });

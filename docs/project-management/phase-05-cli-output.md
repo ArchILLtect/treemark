@@ -466,30 +466,30 @@ contains the exact expected renderer output.
 
 ### File Output
 
-* [ ] `--output` without a filename creates `structure-map.md`.
-* [ ] `--output <path>` uses the user-supplied filename/path.
-* [ ] Generated file contents exactly match renderer output.
-* [ ] Existing output file is replaced rather than appended.
-* [ ] Markdown can be written to a file.
-* [ ] ASCII can be written to a file.
-* [ ] Output-file path inside the scan root is excluded from the tree.
-* [ ] Output path outside the scan root has no unintended exclusion effect.
-* [ ] Writing to an invalid target fails cleanly.
-* [ ] Failed writes do not report success.
-* [ ] Markdown file links are relative to the output document location.
-* [ ] Markdown link paths use `/` on all platforms.
-* [ ] Link-disabled Markdown output uses plain file labels.
+* [x] `--output` without a filename creates `structure-map.md`.
+* [x] `--output <path>` uses the user-supplied filename/path.
+* [x] Generated file contents exactly match renderer output.
+* [x] Existing output file is replaced rather than appended.
+* [x] Markdown can be written to a file.
+* [x] ASCII can be written to a file.
+* [x] Output-file path inside the scan root is excluded from the tree.
+* [x] Output path outside the scan root has no unintended exclusion effect.
+* [x] Writing to an invalid target fails cleanly.
+* [x] Failed writes do not report success.
+* [x] Markdown file links are relative to the output document location.
+* [x] Markdown link paths use `/` on all platforms.
+* [x] Link-disabled Markdown output uses plain file labels.
 
 ### Separation / Hardening
 
-* [ ] CLI orchestration does not duplicate scanner logic.
-* [ ] CLI orchestration does not duplicate renderer logic.
-* [ ] File-output logic does not leak into the scanner.
-* [ ] File-output logic does not leak into renderers.
-* [ ] Snapshot/timestamp behavior is not implemented in Phase 5.
-* [ ] Current output-path design leaves room for future snapshot targets.
-* [ ] Stdout behavior is deterministic.
-* [ ] Repeated runs against unchanged input produce identical output.
+* [x] CLI orchestration does not duplicate scanner logic.
+* [x] CLI orchestration does not duplicate renderer logic.
+* [x] File-output logic does not leak into the scanner.
+* [x] File-output logic does not leak into renderers.
+* [x] Snapshot/timestamp behavior is not implemented in Phase 5.
+* [x] Current output-path design leaves room for future snapshot targets.
+* [x] Stdout behavior is deterministic.
+* [x] Repeated runs against unchanged input produce identical output.
 
 ---
 
@@ -511,27 +511,27 @@ contains the exact expected renderer output.
 
 ### 5B — File Output / Hardening
 
-* [ ] Lock default output filename as `structure-map.md`.
-* [ ] Lock overwrite behavior.
-* [ ] Wire `--output` with optional filename/path.
-* [ ] Use `structure-map.md` when file output is requested without a custom target.
-* [ ] Resolve user-supplied output paths correctly.
-* [ ] Convert in-root output target to explicit scanner exclusion.
-* [ ] Write rendered output to file.
-* [ ] Complete MVP Markdown link behavior for generated files.
-* [ ] Resolve Markdown links relative to the directory containing the output file.
-* [ ] Support plain file labels when links are disabled.
-* [ ] Add Markdown link/path tests for output files.
-* [ ] Replace existing output file contents in full.
-* [ ] Ensure successful file output does not duplicate tree content to stdout.
-* [ ] Add temporary-directory file-output tests.
-* [ ] Add default-filename test.
-* [ ] Add custom-filename test.
-* [ ] Add overwrite test.
-* [ ] Add self-exclusion test.
-* [ ] Add invalid-output error tests.
-* [ ] Review orchestration boundaries.
-* [ ] Review future snapshot compatibility.
+* [x] Lock default output filename as `structure-map.md`.
+* [x] Lock overwrite behavior.
+* [x] Wire `--output` with optional filename/path.
+* [x] Use `structure-map.md` when file output is requested without a custom target.
+* [x] Resolve user-supplied output paths correctly.
+* [x] Convert in-root output target to explicit scanner exclusion.
+* [x] Write rendered output to file.
+* [x] Complete MVP Markdown link behavior for generated files.
+* [x] Resolve Markdown links relative to the directory containing the output file.
+* [x] Support plain file labels when links are disabled.
+* [x] Add Markdown link/path tests for output files.
+* [x] Replace existing output file contents in full.
+* [x] Ensure successful file output does not duplicate tree content to stdout.
+* [x] Add temporary-directory file-output tests.
+* [x] Add default-filename test.
+* [x] Add custom-filename test.
+* [x] Add overwrite test.
+* [x] Add self-exclusion test.
+* [x] Add invalid-output error tests.
+* [x] Review orchestration boundaries.
+* [x] Review future snapshot compatibility.
 * [ ] Verify all OS/Node CI jobs.
 * [ ] Run final `npm run check`.
 
