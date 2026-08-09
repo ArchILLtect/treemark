@@ -1,8 +1,8 @@
 import { beforeEach, expect, test, vi } from "vitest";
+import type * as FsPromises from "node:fs/promises";
 
 vi.mock("node:fs/promises", async (importOriginal) => {
-  const actual =
-    await importOriginal<typeof import("node:fs/promises")>();
+  const actual = await importOriginal<typeof FsPromises>();
 
   return {
     ...actual,
