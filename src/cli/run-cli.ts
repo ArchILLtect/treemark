@@ -6,7 +6,7 @@ import {
   resolve,
   sep,
 } from "node:path";
-import { writeFile, realpath } from "node:fs/promises";
+import { realpath, writeFile } from "node:fs/promises";
 import { scanDirectory } from "../scan/scan-directory.js";
 import { validateOutputTarget } from "./validate-output-target.js";
 import { validateUpdateTarget } from "./validate-update-target.js";
