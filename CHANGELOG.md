@@ -47,3 +47,14 @@ The format is based on Keep a Changelog, and the project will use Semantic Versi
 - Deterministic empty-region and repeated-replacement behavior for synchronized content.
 - Focused synchronization tests covering missing, duplicate, reversed, inline, and whitespace-surrounded markers.
 - Deferred-feature tracking for intentionally postponed TreeMark capabilities and future safety enhancements.
+- End-to-end `--update <file>` synchronization for existing Markdown documents.
+- Update-target validation for missing paths and directory-valued targets.
+- Automatic exclusion of in-root update targets so synchronized documents do not include themselves.
+- Markdown link resolution relative to the update document location, including `--no-links` support.
+- Safe Markdown updates using full-document in-memory replacement, same-directory temporary files, and rename-based target replacement.
+- Idempotent update behavior that skips rewriting unchanged targets and preserves file modification times.
+- Temporary-file cleanup after successful updates and simulated replacement failures.
+- Failure-safe update behavior that preserves the original target when marker validation or filesystem replacement fails.
+- CLI-level LF and CRLF preservation for synchronized Markdown targets.
+- End-to-end synchronization coverage for Markdown, fenced ASCII, cwd-relative update targets, outside-root targets, self-exclusion, idempotence, and invalid update targets.
+- Explicit Phase 6 rejection of `--check` so deferred stale-comparison behavior cannot write through either `--output` or `--update`.

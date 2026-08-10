@@ -536,52 +536,52 @@ Although the parser already recognizes `--check`, Phase 6 must not implement sta
 
 ### Marker Parsing / Validation
 
-* [ ] Valid single marker pair succeeds.
-* [ ] Missing start marker fails.
-* [ ] Missing end marker fails.
-* [ ] Duplicate start marker fails.
-* [ ] Duplicate end marker fails.
-* [ ] Reversed markers fail.
-* [ ] Marker lines are preserved exactly.
-* [ ] Content outside the marked region is preserved exactly.
+* [x] Valid single marker pair succeeds.
+* [x] Missing start marker fails.
+* [x] Missing end marker fails.
+* [x] Duplicate start marker fails.
+* [x] Duplicate end marker fails.
+* [x] Reversed markers fail.
+* [x] Marker lines are preserved exactly.
+* [x] Content outside the marked region is preserved exactly.
 
 ### Replacement Behavior
 
-* [ ] Existing marked content is fully replaced.
-* [ ] Empty marked region can be populated.
+* [x] Existing marked content is fully replaced.
+* [x] Empty marked region can be populated.
 * [x] Generated notice behavior is deterministic.
 * [x] Markdown tree content is inserted correctly.
 * [x] ASCII content is fenced as `text` when inserted into Markdown.
-* [ ] Repeated replacement with unchanged generated content is deterministic.
+* [x] Repeated replacement with unchanged generated content is deterministic.
 
 ### CLI Integration
 
-* [ ] `--update <file>` resolves from the current working directory.
-* [ ] Update target inside the scan root is excluded from generated tree.
-* [ ] Update target outside the scan root causes no unintended exclusion.
-* [ ] Markdown links are relative to the update document location.
-* [ ] `--no-links` works through `--update`.
-* [ ] `--format ascii` works through `--update`.
-* [ ] `--output` with `--update` is rejected.
-* [ ] Successful update does not emit generated tree content to stdout.
+* [x] `--update <file>` resolves from the current working directory.
+* [x] Update target inside the scan root is excluded from generated tree.
+* [x] Update target outside the scan root causes no unintended exclusion.
+* [x] Markdown links are relative to the update document location.
+* [x] `--no-links` works through `--update`.
+* [x] `--format ascii` works through `--update`.
+* [x] `--output` with `--update` is rejected.
+* [x] Successful update does not emit generated tree content to stdout.
 
 ### Safe Mutation
 
-* [ ] Missing update target fails without modification.
-* [ ] Directory-valued update target fails without modification.
-* [ ] Invalid markers fail without modification.
-* [ ] Unchanged target is not rewritten.
-* [ ] Changed target is replaced safely.
-* [ ] Temporary files are cleaned up after success.
-* [ ] Temporary files are cleaned up after simulated failure.
-* [ ] Filesystem failure during update does not corrupt the target.
+* [x] Missing update target fails without modification.
+* [x] Directory-valued update target fails without modification.
+* [x] Invalid markers fail without modification.
+* [x] Unchanged target is not rewritten.
+* [x] Changed target is replaced safely.
+* [x] Temporary files are cleaned up after success.
+* [x] Temporary files are cleaned up after simulated failure.
+* [x] Filesystem failure during update does not corrupt the target.
 
 ### Newlines / Determinism
 
-* [ ] LF target newline style is preserved.
-* [ ] CRLF target newline style is preserved where practical.
-* [ ] Repeated identical updates produce identical document contents.
-* [ ] Generated synchronized content is deterministic.
+* [x] LF target newline style is preserved.
+* [x] CRLF target newline style is preserved where practical.
+* [x] Repeated identical updates produce identical document contents.
+* [x] Generated synchronized content is deterministic.
 
 ### Separation / Hardening
 
@@ -614,25 +614,25 @@ Although the parser already recognizes `--check`, Phase 6 must not implement sta
 
 ### 6B — `--update` Integration / Safe Writes
 
-* [ ] Resolve `--update` target path.
-* [ ] Validate update target exists and is a file.
-* [ ] Convert in-root update target to scanner exclusion.
-* [ ] Compute Markdown link base from update target location.
-* [ ] Wire Markdown synchronization into CLI.
-* [ ] Wire ASCII synchronization into CLI.
-* [ ] Wire `--no-links` through update flow.
-* [ ] Read and validate full target before writing.
-* [ ] Compare updated document before write.
-* [ ] Skip write when unchanged.
-* [ ] Implement temporary-file write.
-* [ ] Implement replacement rename.
-* [ ] Implement temporary-file cleanup.
-* [ ] Add update-target validation errors.
-* [ ] Add end-to-end update tests.
-* [ ] Add failure/no-corruption tests.
-* [ ] Add idempotence test.
-* [ ] Add newline-preservation tests.
-* [ ] Review safe-mutation sequence.
+* [x] Resolve `--update` target path.
+* [x] Validate update target exists and is a file.
+* [x] Convert in-root update target to scanner exclusion.
+* [x] Compute Markdown link base from update target location.
+* [x] Wire Markdown synchronization into CLI.
+* [x] Wire ASCII synchronization into CLI.
+* [x] Wire `--no-links` through update flow.
+* [x] Read and validate full target before writing.
+* [x] Compare updated document before write.
+* [x] Skip write when unchanged.
+* [x] Implement temporary-file write.
+* [x] Implement replacement rename.
+* [x] Implement temporary-file cleanup.
+* [x] Add update-target validation errors.
+* [x] Add end-to-end update tests.
+* [x] Add failure/no-corruption tests.
+* [x] Add idempotence test.
+* [x] Add newline-preservation tests.
+* [x] Review safe-mutation sequence.
 * [ ] Verify all OS/Node CI jobs.
 * [ ] Run final `npm run check`.
 

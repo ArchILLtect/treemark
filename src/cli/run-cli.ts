@@ -9,9 +9,13 @@ import {
 import { writeFile } from "node:fs/promises";
 import { scanDirectory } from "../scan/scan-directory.js";
 import { validateOutputTarget } from "./validate-output-target.js";
+import { validateUpdateTarget } from "./validate-update-target.js";
 import { renderAscii } from "../render/render-ascii.js";
 import { renderMarkdown } from "../render/render-markdown.js";
 import { normalizeRelativePath } from "../scan/normalize-relative-path.js";
+import {
+  updateMarkdownFile,
+} from "../sync/update-markdown-file.js";
 
 const DEVELOPMENT_VERSION = "0.0.0-development";
 
@@ -86,11 +90,34 @@ export function createProgram(): Command {
         $ treemark ./docs --output
         $ treemark ./docs --output structure-map.md
         $ treemark ./docs --update README.md
-        $ treemark ./docs --update README.md --check
       `,
     );
 
   return program;
+}
+
+function getRootRelativeExclusion(
+  resolvedRootPath: string,
+  resolvedTargetPath: string | undefined,
+): string | undefined {
+  if (resolvedTargetPath === undefined) {
+    return undefined;
+  }
+
+  const relativePath = relative(
+    resolvedRootPath,
+    resolvedTargetPath,
+  );
+
+  const isInsideRoot =
+    relativePath !== "" &&
+    relativePath !== ".." &&
+    !relativePath.startsWith(`..${sep}`) &&
+    !isAbsolute(relativePath);
+
+  return isInsideRoot
+    ? normalizeRelativePath(relativePath)
+    : undefined;
 }
 
 export async function runCli(argv: string[]): Promise<void> {
@@ -110,6 +137,10 @@ export async function runCli(argv: string[]): Promise<void> {
       ? resolve(outputTarget)
       : undefined;
 
+  const resolvedUpdatePath =
+    options.update !== undefined
+      ? resolve(options.update)
+      : undefined;
 
   if (options.format !== "markdown" && options.format !== "ascii") {
     throw new Error(
@@ -121,12 +152,10 @@ export async function runCli(argv: string[]): Promise<void> {
     throw new Error("--output and --update cannot be used together");
   }
 
-  if (
-    options.check &&
-    options.output === undefined &&
-    options.update === undefined
-  ) {
-    throw new Error("--check requires --output or --update");
+  if (options.check) {
+    throw new Error(
+      "--check is not implemented yet",
+    );
   }
 
   if (root === undefined) {
@@ -135,37 +164,53 @@ export async function runCli(argv: string[]): Promise<void> {
 
   const resolvedRootPath = resolve(root);
 
-  const relativeOutputPath =
-    resolvedOutputPath !== undefined
-      ? relative(resolvedRootPath, resolvedOutputPath)
-      : undefined;
+  if (resolvedUpdatePath !== undefined) {
+    await validateUpdateTarget(
+      resolvedUpdatePath,
+    );
+  }
 
   const outputExclusion =
-    relativeOutputPath !== undefined &&
-    relativeOutputPath !== "" &&
-    relativeOutputPath !== ".." &&
-    !relativeOutputPath.startsWith(`..${sep}`) &&
-    !isAbsolute(relativeOutputPath)
-      ? normalizeRelativePath(relativeOutputPath)
-      : undefined;
+    getRootRelativeExclusion(
+      resolvedRootPath,
+      resolvedOutputPath,
+    );
+
+  const updateExclusion =
+    getRootRelativeExclusion(
+      resolvedRootPath,
+      resolvedUpdatePath,
+    );
+
+  const markdownTargetPath =
+    resolvedOutputPath ??
+    resolvedUpdatePath;
 
   const markdownLinkBasePath =
-    resolvedOutputPath !== undefined
+    markdownTargetPath !== undefined
       ? normalizeRelativePath(
           relative(
-            dirname(resolvedOutputPath),
+            dirname(markdownTargetPath),
             resolvedRootPath,
           ),
         )
       : undefined;
+
+  const excludedPaths = [
+    outputExclusion,
+    updateExclusion,
+  ].filter(
+    (path): path is string =>
+      path !== undefined,
+  );
 
   const tree = await scanDirectory(root, {
     ignorePatterns: options.ignore,
     ...(options.maxDepth !== undefined
       ? { maxDepth: options.maxDepth }
       : {}),
-    ...(outputExclusion !== undefined
-      ? { excludedPaths: [outputExclusion] }
+    ...(excludedPaths.length > 0
+      ? { excludedPaths }
       : {}),
   });
 
@@ -190,7 +235,19 @@ export async function runCli(argv: string[]): Promise<void> {
       output,
       "utf8",
     );
-  } else {
-    process.stdout.write(output);
+
+    return;
   }
+
+  if (resolvedUpdatePath !== undefined) {
+    await updateMarkdownFile(
+      resolvedUpdatePath,
+      output,
+      options.format,
+    );
+
+    return;
+  }
+
+  process.stdout.write(output);
 }
