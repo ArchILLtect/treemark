@@ -18,7 +18,7 @@ Phase documents describe how that contract is implemented.
 | 3 | Directory scanner | ✅ Complete |
 | 4 | Renderers | ✅ Complete |
 | 5 | File output | ✅ Complete |
-| 6 | Markdown synchronization | ⬜ Planned |
+| 6 | Markdown synchronization | ✅ Complete |
 | 7 | Check mode | ⬜ Planned |
 | 8 | Package hardening | ⬜ Planned |
 | 9 | npm publication | ⬜ Planned |
