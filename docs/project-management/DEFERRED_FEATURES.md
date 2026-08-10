@@ -254,6 +254,45 @@ Open decisions:
 
 Status: Deferred post-MVP.
 
+## Check Mode and Drift Reporting
+
+### Structured stale-diff reporting
+
+Extend `--check` so TreeMark can explain how the current target differs from
+the expected generated structure instead of reporting only a binary
+current/stale result.
+
+Potential future output:
+
+```text
+TreeMark: structure is stale
+
++ src/auth/session.ts
+- src/auth/token.ts
+```
+
+Potential uses include:
+
+- Faster diagnosis of stale generated files in CI.
+- Clearer human review before regenerating documentation.
+- Distinguishing additions, removals, and other structural drift.
+- Supporting future automation or policy rules based on the kind of change.
+- Providing more actionable --check output than exit code 2 alone.
+
+A robust implementation should prefer structural comparison over attempting
+to infer semantic changes from a textual Markdown or ASCII diff.
+
+Open decisions:
+
+- Whether to report files only or directories as well.
+- How to represent moves or renames.
+- Whether formatting-only differences should be reported separately.
+- Whether detailed output is default or enabled by a flag.
+- Whether structured results should eventually be available programmatically.
+- How drift reporting should interact with Markdown links and synchronized regions.
+
+Status: Deferred post-MVP.
+
 ---
 
 ## Notes
@@ -263,3 +302,5 @@ Status: Deferred post-MVP.
 - `--update` is likewise active MVP work and belongs to Phase 6, not this file.
 - Items should only be added here when the project has explicitly decided to
   postpone them, not merely because they have not been implemented yet.
+
+---

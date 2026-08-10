@@ -58,3 +58,9 @@ The format is based on Keep a Changelog, and the project will use Semantic Versi
 - CLI-level LF and CRLF preservation for synchronized Markdown targets.
 - End-to-end synchronization coverage for Markdown, fenced ASCII, cwd-relative update targets, outside-root targets, self-exclusion, idempotence, and invalid update targets.
 - Explicit Phase 6 rejection of `--check` so deferred stale-comparison behavior cannot write through either `--output` or `--update`.
+- Pure current/stale content comparison primitive for check-mode freshness evaluation.
+- Read-only full-file output comparison helper for existing generated artifacts.
+- Read-only synchronized-document comparison that reuses the existing `buildUpdatedDocument()` path.
+- Exact current/stale comparison semantics shared across output and update check paths.
+- Focused Phase 7A unit coverage for matching and stale full-file outputs and synchronized Markdown documents.
+- Deferred-feature tracking for future structured stale-diff reporting.
