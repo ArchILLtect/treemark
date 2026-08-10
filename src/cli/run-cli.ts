@@ -6,7 +6,7 @@ import {
   resolve,
   sep,
 } from "node:path";
-import { writeFile } from "node:fs/promises";
+import { writeFile, realpath } from "node:fs/promises";
 import { scanDirectory } from "../scan/scan-directory.js";
 import { validateOutputTarget } from "./validate-output-target.js";
 import { validateUpdateTarget } from "./validate-update-target.js";
@@ -164,11 +164,20 @@ export async function runCli(argv: string[]): Promise<void> {
 
   const resolvedRootPath = resolve(root);
 
+  const canonicalRootPath = await realpath(
+    resolvedRootPath,
+  );
+
   if (resolvedUpdatePath !== undefined) {
     await validateUpdateTarget(
       resolvedUpdatePath,
     );
   }
+
+  const canonicalUpdatePath =
+    resolvedUpdatePath !== undefined
+      ? await realpath(resolvedUpdatePath)
+      : undefined;
 
   const outputExclusion =
     getRootRelativeExclusion(
@@ -178,20 +187,25 @@ export async function runCli(argv: string[]): Promise<void> {
 
   const updateExclusion =
     getRootRelativeExclusion(
-      resolvedRootPath,
-      resolvedUpdatePath,
+      canonicalRootPath,
+      canonicalUpdatePath,
     );
 
   const markdownTargetPath =
     resolvedOutputPath ??
-    resolvedUpdatePath;
+    canonicalUpdatePath;
+
+  const markdownRootPath =
+    resolvedUpdatePath !== undefined
+      ? canonicalRootPath
+      : resolvedRootPath;
 
   const markdownLinkBasePath =
     markdownTargetPath !== undefined
       ? normalizeRelativePath(
           relative(
             dirname(markdownTargetPath),
-            resolvedRootPath,
+            markdownRootPath,
           ),
         )
       : undefined;

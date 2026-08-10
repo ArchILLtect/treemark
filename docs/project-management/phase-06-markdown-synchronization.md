@@ -633,8 +633,8 @@ Although the parser already recognizes `--check`, Phase 6 must not implement sta
 * [x] Add idempotence test.
 * [x] Add newline-preservation tests.
 * [x] Review safe-mutation sequence.
-* [ ] Verify all OS/Node CI jobs.
-* [ ] Run final `npm run check`.
+* [x] Verify all OS/Node CI jobs.
+* [x] Run final `npm run check`.
 
 ---
 
