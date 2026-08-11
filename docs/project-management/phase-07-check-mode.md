@@ -1,6 +1,6 @@
 # Phase 7 — Check Mode
 
-Status: **Planned**
+Status: **Complete**
 
 ## Goal
 
@@ -342,8 +342,8 @@ Prefer small helpers over duplicating comparison logic in `run-cli.ts`.
 * [x] Add exit-code E2E tests.
 * [x] Review orchestration boundaries.
 * [x] Split E2E suites by responsibility if appropriate.
-* [ ] Verify all OS/Node CI jobs.
-* [ ] Run final `npm run check`.
+* [x] Verify all OS/Node CI jobs.
+* [x] Run final `npm run check`.
 
 ---
 

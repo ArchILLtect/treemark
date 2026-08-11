@@ -3,6 +3,15 @@
   "version": "0.0.0-development",
   "private": true,
   "description": "Generate and synchronize Markdown-friendly directory trees.",
+  "homepage": "https://nickhanson.me/projects/treemark",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArchILLtect/treemark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ArchILLtect/treemark/issues"
+  },
+  "author": "Nick Hanson",
   "type": "module",
   "bin": {
     "treemark": "./dist/cli.js"
@@ -10,7 +19,8 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "docs/images/**"
   ],
   "engines": {
     "node": ">=22"
@@ -24,7 +34,8 @@
     "lint": "eslint .",
     "check": "npm run lint && npm run typecheck && npm test && npm run build",
     "prepack": "npm run check",
-    "pack:check": "npm pack --dry-run"
+    "pack:check": "npm pack --dry-run",
+    "smoke:package": "node scripts/package-smoke.mjs"
   },
   "dependencies": {
     "commander": "^14.0.0",
@@ -45,7 +56,9 @@
     "documentation",
     "cli",
     "docs",
-    "filesystem"
+    "filesystem",
+    "project-structure",
+    "tree"
   ],
   "license": "MIT"
 }

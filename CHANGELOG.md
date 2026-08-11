@@ -77,3 +77,14 @@ The format is based on Keep a Changelog, and the project will use Semantic Versi
 - Deterministic repeated check behavior with unchanged contents, unchanged modification times, and clean stdout.
 - Expanded end-to-end check-mode coverage for current, stale, invalid, missing, and directory-valued targets.
 - E2E test-suite reorganization into focused base CLI, output, update, check, and process-boundary suites.
+- Public npm package metadata for the TreeMark homepage, GitHub repository, issue tracker, author, and expanded discovery keywords.
+- Phase 8 package-boundary hardening for a CLI-only public artifact, keeping the supported package surface limited to the executable distribution and public documentation.
+- Lean production builds that omit TypeScript declaration files, declaration maps, and JavaScript source maps from the published CLI artifact.
+- npm tarball inspection confirming the packed package contains only the intended runtime and public-documentation files.
+- Manual packed-package verification by installing the generated tarball into an isolated consumer project outside the TreeMark repository.
+- Automated packed-package smoke testing with `npm run smoke:package`, covering installation, version/help output, Markdown and ASCII rendering, file output, Markdown synchronization, current/stale checks, and operational failure handling.
+- Cross-platform smoke-test subprocess handling that runs npm and the installed TreeMark CLI through their JavaScript entry points instead of relying on Windows `.cmd` shim execution.
+- ESLint coverage for Node-based release tooling while preserving strict type-aware linting for the TypeScript application and test code.
+- Comprehensive public README documentation for installation, rendering, file output, synchronization, check mode, exit codes, ignore patterns, maximum depth, root inclusion, CLI usage, limitations, development, and project links.
+- README marker documentation designed to avoid duplicate live synchronization markers while still providing users with an exact discoverable marker source.
+- TreeMark dogfooding in its own README through a live synchronized Project structure section with generated destination-relative file links.

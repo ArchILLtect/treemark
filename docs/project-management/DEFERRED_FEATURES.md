@@ -84,7 +84,42 @@ Status: Deferred post-MVP.
 
 ### `.gitignore` integration
 
-Allow TreeMark to optionally import or honor repository `.gitignore` rules.
+Allow TreeMark to optionally read the scanned root's `.gitignore` file and
+apply its rules in addition to TreeMark's built-in ignores and any explicit
+`--ignore` patterns.
+
+Potential future CLI behavior:
+
+```bash
+treemark . --gitignore
+```
+
+Recommended initial scope:
+
+* Opt-in behavior rather than automatic `.gitignore` loading.
+* Read only the `.gitignore` located at the scanned root.
+* Support Git-style ignore patterns, including negation rules where practical.
+* Combine `.gitignore` rules with TreeMark's built-in ignores.
+* Keep explicit `--ignore` patterns additive.
+* Treat a missing `.gitignore` as normal rather than an error.
+
+Potential uses include:
+
+* Avoiding duplicate ignore configuration between Git and TreeMark.
+* Excluding generated output, caches, temporary files, and other repository
+  artifacts already covered by `.gitignore`.
+* Making common project scans easier to configure while keeping TreeMark's
+  default behavior explicit and deterministic.
+
+Open decisions:
+
+* Whether nested `.gitignore` files should eventually be supported.
+* Exact compatibility target with Git's ignore semantics.
+* How ignored-but-already-tracked files should be handled.
+* Precedence rules if future configuration files can also provide ignore
+  patterns.
+* Whether TreeMark should expose diagnostics showing which rule excluded a
+  path.
 
 Status: Deferred post-MVP.
 

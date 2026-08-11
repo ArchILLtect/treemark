@@ -13,15 +13,16 @@ Phase documents describe how that contract is implemented.
 
 | Phase | Description | Status |
 |---|---|---|
-| 1 | Product contract | ✅ Complete |
-| 2 | Repository setup | ✅ Complete |
-| 3 | Directory scanner | ✅ Complete |
-| 4 | Renderers | ✅ Complete |
-| 5 | File output | ✅ Complete |
-| 6 | Markdown synchronization | ✅ Complete |
-| 7 | Check mode | ⬜ Planned |
-| 8 | Package hardening | ⬜ Planned |
-| 9 | npm publication | ⬜ Planned |
+| 1  | Product contract | ✅ Complete |
+| 2  | Repository setup | ✅ Complete |
+| 3  | Directory scanner | ✅ Complete |
+| 4  | Renderers | ✅ Complete |
+| 5  | File output | ✅ Complete |
+| 6  | Markdown synchronization | ✅ Complete |
+| 7  | Check mode | ✅ Complete |
+| 8  | Package hardening | ⬜ Planned |
+| 9  | npm publication | ⬜ Planned |
+| 10 | Treemark landing page | ⬜ Planned |
 
 ## Working Rules
 

@@ -3,7 +3,11 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: ["dist/**", "coverage/**", "eslint.config.js"],
+    ignores: [
+      "dist/**",
+      "coverage/**",
+      "eslint.config.js",
+    ],
   },
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
@@ -17,6 +21,18 @@ export default tseslint.config(
     rules: {
       "@typescript-eslint/consistent-type-imports": "error",
       "@typescript-eslint/no-confusing-void-expression": "off",
+    },
+  },
+  {
+    files: ["scripts/**/*.mjs"],
+    extends: [
+      tseslint.configs.disableTypeChecked,
+    ],
+    languageOptions: {
+      globals: {
+        console: "readonly",
+        process: "readonly",
+      },
     },
   },
 );
