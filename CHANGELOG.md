@@ -64,3 +64,16 @@ The format is based on Keep a Changelog, and the project will use Semantic Versi
 - Exact current/stale comparison semantics shared across output and update check paths.
 - Focused Phase 7A unit coverage for matching and stale full-file outputs and synchronized Markdown documents.
 - Deferred-feature tracking for future structured stale-diff reporting.
+- End-to-end `--check` support for both generated output files and synchronized Markdown targets.
+- Check-mode exit-code contract with `0` for current content, `2` for stale content, and `1` for operational or validation failures.
+- Read-only `--output --check` comparisons that preserve target contents and modification times.
+- Read-only `--update --check` comparisons that reuse the existing synchronization pipeline and never mutate the target.
+- Check-mode support for Markdown and ASCII output, including synchronized fenced ASCII regions.
+- Check-mode parity for destination-relative Markdown links, `--no-links`, default `structure-map.md` resolution, cwd-relative update targets, in-root self-exclusion, and outside-root targets.
+- LF and CRLF parity for synchronized check-mode comparisons.
+- Explicit validation that `--check` requires either `--output` or `--update`.
+- Process-boundary verification of exit codes `0`, `1`, and `2`.
+- Cross-platform path canonicalization for existing check targets to avoid macOS path-alias mismatches during containment and exclusion checks.
+- Deterministic repeated check behavior with unchanged contents, unchanged modification times, and clean stdout.
+- Expanded end-to-end check-mode coverage for current, stale, invalid, missing, and directory-valued targets.
+- E2E test-suite reorganization into focused base CLI, output, update, check, and process-boundary suites.

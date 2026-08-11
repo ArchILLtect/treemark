@@ -253,61 +253,61 @@ Prefer small helpers over duplicating comparison logic in `run-cli.ts`.
 
 ### Validation
 
-* [ ] `--check` without `--output` or `--update` fails.
-* [ ] `--output` with `--update` remains rejected.
-* [ ] Missing output check target fails with exit `1`.
-* [ ] Directory-valued output check target fails with exit `1`.
-* [ ] Missing update check target fails with exit `1`.
-* [ ] Directory-valued update check target fails with exit `1`.
-* [ ] Invalid update markers fail with exit `1`.
+* [x] `--check` without `--output` or `--update` fails.
+* [x] `--output` with `--update` remains rejected.
+* [x] Missing output check target fails with exit `1`.
+* [x] Directory-valued output check target fails with exit `1`.
+* [x] Missing update check target fails with exit `1`.
+* [x] Directory-valued update check target fails with exit `1`.
+* [x] Invalid update markers fail with exit `1`.
 
 ### Output Check
 
-* [ ] Current Markdown output returns exit `0`.
-* [ ] Stale Markdown output returns exit `2`.
-* [ ] Current ASCII output returns exit `0`.
-* [ ] Stale ASCII output returns exit `2`.
-* [ ] Bare `--output --check` uses `structure-map.md`.
-* [ ] In-root output target is excluded during comparison.
-* [ ] Outside-root output target causes no unintended exclusion.
-* [ ] Destination-relative Markdown links match normal output behavior.
-* [ ] `--no-links` affects expected output correctly.
-* [ ] Check mode does not rewrite or create the output target.
-* [ ] Check mode emits no generated tree content to stdout.
+* [x] Current Markdown output returns exit `0`.
+* [x] Stale Markdown output returns exit `2`.
+* [x] Current ASCII output returns exit `0`.
+* [x] Stale ASCII output returns exit `2`.
+* [x] Bare `--output --check` uses `structure-map.md`.
+* [x] In-root output target is excluded during comparison.
+* [x] Outside-root output target causes no unintended exclusion.
+* [x] Destination-relative Markdown links match normal output behavior.
+* [x] `--no-links` affects expected output correctly.
+* [x] Check mode does not rewrite or create the output target.
+* [x] Check mode emits no generated tree content to stdout.
 
 ### Update Check
 
-* [ ] Current synchronized Markdown returns exit `0`.
-* [ ] Stale synchronized Markdown returns exit `2`.
-* [ ] Current synchronized ASCII returns exit `0`.
-* [ ] Stale synchronized ASCII returns exit `2`.
-* [ ] CWD-relative update target resolution matches normal update behavior.
-* [ ] In-root update target is excluded during comparison.
-* [ ] Outside-root update target causes no unintended exclusion.
-* [ ] Destination-relative Markdown links match normal update behavior.
-* [ ] `--no-links` affects expected synchronized content correctly.
-* [ ] Marker validation matches normal update behavior.
-* [ ] LF targets compare correctly.
-* [ ] CRLF targets compare correctly.
-* [ ] Check mode does not rewrite the update target.
-* [ ] Check mode emits no generated tree content to stdout.
+* [x] Current synchronized Markdown returns exit `0`.
+* [x] Stale synchronized Markdown returns exit `2`.
+* [x] Current synchronized ASCII returns exit `0`.
+* [x] Stale synchronized ASCII returns exit `2`.
+* [x] CWD-relative update target resolution matches normal update behavior.
+* [x] In-root update target is excluded during comparison.
+* [x] Outside-root update target causes no unintended exclusion.
+* [x] Destination-relative Markdown links match normal update behavior.
+* [x] `--no-links` affects expected synchronized content correctly.
+* [x] Marker validation matches normal update behavior.
+* [x] LF targets compare correctly.
+* [x] CRLF targets compare correctly.
+* [x] Check mode does not rewrite the update target.
+* [x] Check mode emits no generated tree content to stdout.
 
 ### Exit Codes / Determinism
 
-* [ ] Current target produces exit `0`.
-* [ ] Stale target produces exit `2`.
-* [ ] Operational failure produces exit `1`.
-* [ ] Repeated checks against unchanged inputs produce identical results.
-* [ ] Running check mode never changes target modification time.
+* [x] Current target produces exit `0`.
+* [x] Stale target produces exit `2`.
+* [x] Operational failure produces exit `1`.
+* [x] Repeated checks against unchanged inputs produce identical results.
+* [x] Running check mode never changes target modification time.
 
 ### Separation / Hardening
 
-* [ ] Check mode reuses existing renderers.
-* [ ] Check mode reuses existing synchronization composition/replacement logic.
-* [ ] Scanner remains unaware of check mode.
-* [ ] Renderers remain unaware of check mode.
-* [ ] Check comparison code performs no writes.
-* [ ] Exit code `2` is used only for valid-but-stale content.
+* [x] Check mode reuses existing renderers.
+* [x] Check mode reuses existing synchronization composition/replacement logic.
+* [x] Scanner remains unaware of check mode.
+* [x] Renderers remain unaware of check mode.
+* [x] Check comparison code performs no writes.
+* [x] Exit code `2` is used only for valid-but-stale content.
 
 ---
 
@@ -328,20 +328,20 @@ Prefer small helpers over duplicating comparison logic in `run-cli.ts`.
 
 ### 7B — CLI / Exit Codes
 
-* [ ] Activate `--check`.
-* [ ] Restore `--check requires --output or --update`.
-* [ ] Wire `--output --check`.
-* [ ] Wire `--update --check`.
-* [ ] Return/set exit `0` for current targets.
-* [ ] Return/set exit `2` for stale targets.
-* [ ] Preserve exit `1` for operational failures.
-* [ ] Keep check-mode stdout clean.
-* [ ] Add output-check E2E tests.
-* [ ] Add update-check E2E tests.
-* [ ] Add no-mutation/mtime E2E tests.
-* [ ] Add exit-code E2E tests.
-* [ ] Review orchestration boundaries.
-* [ ] Split E2E suites by responsibility if appropriate.
+* [x] Activate `--check`.
+* [x] Restore `--check requires --output or --update`.
+* [x] Wire `--output --check`.
+* [x] Wire `--update --check`.
+* [x] Return/set exit `0` for current targets.
+* [x] Return/set exit `2` for stale targets.
+* [x] Preserve exit `1` for operational failures.
+* [x] Keep check-mode stdout clean.
+* [x] Add output-check E2E tests.
+* [x] Add update-check E2E tests.
+* [x] Add no-mutation/mtime E2E tests.
+* [x] Add exit-code E2E tests.
+* [x] Review orchestration boundaries.
+* [x] Split E2E suites by responsibility if appropriate.
 * [ ] Verify all OS/Node CI jobs.
 * [ ] Run final `npm run check`.
 

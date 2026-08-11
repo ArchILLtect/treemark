@@ -4,7 +4,11 @@ import { runCli } from "./cli/run-cli.js";
 import { formatCliError } from "./cli/format-error.js";
 
 try {
-  await runCli(process.argv);
+  const exitCode = await runCli(
+    process.argv,
+  );
+
+  process.exitCode = exitCode;
 } catch (error: unknown) {
   const message = formatCliError(error);
   console.error(`TreeMark: ${message}`);

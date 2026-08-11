@@ -13,9 +13,10 @@ import { validateUpdateTarget } from "./validate-update-target.js";
 import { renderAscii } from "../render/render-ascii.js";
 import { renderMarkdown } from "../render/render-markdown.js";
 import { normalizeRelativePath } from "../scan/normalize-relative-path.js";
-import {
-  updateMarkdownFile,
-} from "../sync/update-markdown-file.js";
+import { updateMarkdownFile } from "../sync/update-markdown-file.js";
+import { checkOutputFile } from "../check/check-output-file.js";
+import { checkUpdateFile } from "../check/check-update-file.js";
+import type { FreshnessStatus } from "../check/check-content.js";
 
 const DEVELOPMENT_VERSION = "0.0.0-development";
 
@@ -42,6 +43,16 @@ export interface CliOptions {
   check: boolean;
   includeRoot: boolean;
   links: boolean;
+}
+
+export type CliExitCode = 0 | 2;
+
+function getCheckExitCode(
+  status: FreshnessStatus,
+): CliExitCode {
+  return status === "current"
+    ? 0
+    : 2;
 }
 
 export function createProgram(): Command {
@@ -120,7 +131,9 @@ function getRootRelativeExclusion(
     : undefined;
 }
 
-export async function runCli(argv: string[]): Promise<void> {
+export async function runCli(
+  argv: string[],
+): Promise<CliExitCode> {
   const program = createProgram();
   program.parse(argv);
 
@@ -152,9 +165,13 @@ export async function runCli(argv: string[]): Promise<void> {
     throw new Error("--output and --update cannot be used together");
   }
 
-  if (options.check) {
+  if (
+    options.check &&
+    options.output === undefined &&
+    options.update === undefined
+  ) {
     throw new Error(
-      "--check is not implemented yet",
+      "--check requires --output or --update",
     );
   }
 
@@ -167,6 +184,12 @@ export async function runCli(argv: string[]): Promise<void> {
   const canonicalRootPath = await realpath(
     resolvedRootPath,
   );
+
+  const canonicalOutputPath =
+    options.check &&
+    resolvedOutputPath !== undefined
+      ? await realpath(resolvedOutputPath)
+      : undefined;
 
   if (resolvedUpdatePath !== undefined) {
     await validateUpdateTarget(
@@ -181,8 +204,12 @@ export async function runCli(argv: string[]): Promise<void> {
 
   const outputExclusion =
     getRootRelativeExclusion(
-      resolvedRootPath,
-      resolvedOutputPath,
+      options.check
+        ? canonicalRootPath
+        : resolvedRootPath,
+      options.check
+        ? canonicalOutputPath
+        : resolvedOutputPath,
     );
 
   const updateExclusion =
@@ -192,11 +219,14 @@ export async function runCli(argv: string[]): Promise<void> {
     );
 
   const markdownTargetPath =
-    resolvedOutputPath ??
-    canonicalUpdatePath;
+    options.check && canonicalOutputPath !== undefined
+      ? canonicalOutputPath
+      : resolvedOutputPath ??
+        canonicalUpdatePath;
 
   const markdownRootPath =
-    resolvedUpdatePath !== undefined
+    resolvedUpdatePath !== undefined ||
+    (options.check && canonicalOutputPath !== undefined)
       ? canonicalRootPath
       : resolvedRootPath;
 
@@ -242,7 +272,18 @@ export async function runCli(argv: string[]): Promise<void> {
         });
 
   if (resolvedOutputPath !== undefined) {
-    await validateOutputTarget(resolvedOutputPath);
+    await validateOutputTarget(
+      resolvedOutputPath,
+    );
+
+    if (options.check) {
+      const status = await checkOutputFile(
+        resolvedOutputPath,
+        output,
+      );
+
+      return getCheckExitCode(status);
+    }
 
     await writeFile(
       resolvedOutputPath,
@@ -250,18 +291,30 @@ export async function runCli(argv: string[]): Promise<void> {
       "utf8",
     );
 
-    return;
+    return 0;
   }
 
   if (resolvedUpdatePath !== undefined) {
+    if (options.check) {
+      const status = await checkUpdateFile(
+        resolvedUpdatePath,
+        output,
+        options.format,
+      );
+
+      return getCheckExitCode(status);
+    }
+
     await updateMarkdownFile(
       resolvedUpdatePath,
       output,
       options.format,
     );
 
-    return;
+    return 0;
   }
 
   process.stdout.write(output);
+
+  return 0;
 }
