@@ -1,3 +1,5 @@
+![README Banner](docs/images/banner-README.png)
+
 # TreeMark
 
 > Generate and synchronize Markdown-friendly directory trees.
