@@ -1,6 +1,6 @@
 # Phase 8 — Package Hardening
 
-Status: **Planned**
+Status: **Complete**
 
 ## Goal
 
@@ -247,15 +247,15 @@ Phase 9
 
 ### Package Metadata
 
-* [ ] Package name is intentional and publication-ready.
+* [x] Package name is intentional and publication-ready.
 * [x] Package description is accurate.
-* [ ] `bin` points to the compiled CLI entry point.
+* [x] `bin` points to the compiled CLI entry point.
 * [x] Node engine requirement matches the supported CI/runtime contract.
 * [x] License metadata matches the actual repository license.
-* [ ] Repository metadata is correct.
-* [ ] Keywords are reasonable and not misleading.
-* [ ] Development-only metadata does not leak into the public contract.
-* [ ] Publication guard behavior is understood and documented for Phase 9.
+* [x] Repository metadata is correct.
+* [x] Keywords are reasonable and not misleading.
+* [x] Development-only metadata does not leak into the public contract.
+* [x] Publication guard behavior is understood and documented for Phase 9.
 
 ### Public project URLs
 
@@ -273,65 +273,65 @@ The homepage route is an MVP requirement.
 
 ### Packed Artifact
 
-* [ ] `npm pack` succeeds.
-* [ ] Tarball contains the compiled CLI.
-* [ ] Tarball contains README.
-* [ ] Tarball contains license.
-* [ ] Tarball contains correct package metadata.
-* [ ] Tests are excluded unless intentionally shipped.
-* [ ] Project-management docs are excluded unless intentionally shipped.
-* [ ] Local/temp/build-trash files are excluded.
-* [ ] No required runtime file is missing.
-* [ ] Tarball contents are intentionally minimal.
-* [ ] Package size is reasonable for the MVP.
+* [x] `npm pack` succeeds.
+* [x] Tarball contains the compiled CLI.
+* [x] Tarball contains README.
+* [x] Tarball contains license.
+* [x] Tarball contains correct package metadata.
+* [x] Tests are excluded unless intentionally shipped.
+* [x] Project-management docs are excluded unless intentionally shipped.
+* [x] Local/temp/build-trash files are excluded.
+* [x] No required runtime file is missing.
+* [x] Tarball contents are intentionally minimal.
+* [x] Package size is reasonable for the MVP.
 
 ### Installed-Package Smoke Test
 
-* [ ] Packed tarball installs into a clean temporary project.
-* [ ] Installed `treemark` executable resolves correctly.
-* [ ] `treemark --version` works.
-* [ ] `treemark --help` works.
-* [ ] Markdown stdout generation works.
-* [ ] ASCII stdout generation works.
-* [ ] `--output` works.
-* [ ] `--update` works.
-* [ ] `--check` current result exits `0`.
-* [ ] `--check` stale result exits `2`.
-* [ ] Operational CLI failure exits `1`.
-* [ ] Installed package does not rely on repository-only dependencies or paths.
+* [x] Packed tarball installs into a clean temporary project.
+* [x] Installed `treemark` executable resolves correctly.
+* [x] `treemark --version` works.
+* [x] `treemark --help` works.
+* [x] Markdown stdout generation works.
+* [x] ASCII stdout generation works.
+* [x] `--output` works.
+* [x] `--update` works.
+* [x] `--check` current result exits `0`.
+* [x] `--check` stale result exits `2`.
+* [x] Operational CLI failure exits `1`.
+* [x] Installed package does not rely on repository-only dependencies or paths.
 
 ### Public Documentation
 
-* [ ] README explains TreeMark's purpose clearly.
-* [ ] Installation instructions are correct.
-* [ ] Quick-start example is correct.
-* [ ] `--output` is documented.
-* [ ] `--update` is documented.
-* [ ] Marker syntax is documented exactly.
-* [ ] Generated-content ownership behavior is documented.
-* [ ] `--check` is documented.
-* [ ] Exit codes `0`, `1`, and `2` are documented.
-* [ ] Markdown/ASCII formats are documented.
-* [ ] `--no-links` is documented.
-* [ ] Ignore patterns are documented.
-* [ ] Maximum depth is documented.
-* [ ] Root inclusion is documented.
-* [ ] Safe-update review guidance is documented.
-* [ ] Node version requirement is documented.
-* [ ] MVP limitations are not misrepresented.
-* [ ] README commands match actual CLI help.
+* [x] README explains TreeMark's purpose clearly.
+* [x] Installation instructions are correct.
+* [x] Quick-start example is correct.
+* [x] `--output` is documented.
+* [x] `--update` is documented.
+* [x] Marker syntax is documented exactly.
+* [x] Generated-content ownership behavior is documented.
+* [x] `--check` is documented.
+* [x] Exit codes `0`, `1`, and `2` are documented.
+* [x] Markdown/ASCII formats are documented.
+* [x] `--no-links` is documented.
+* [x] Ignore patterns are documented.
+* [x] Maximum depth is documented.
+* [x] Root inclusion is documented.
+* [x] Safe-update review guidance is documented.
+* [x] Node version requirement is documented.
+* [x] MVP limitations are not misrepresented.
+* [x] README commands match actual CLI help.
 
 ### Release Readiness
 
-* [ ] `npm run check` passes.
-* [ ] Packed-package smoke tests pass.
-* [ ] Full GitHub Actions Node/OS matrix passes.
-* [ ] Changelog reflects Phase 8 hardening.
-* [ ] Package metadata has received a final review.
-* [ ] Packed artifact has received a final review.
-* [ ] README has received a final user-facing review.
-* [ ] Publication remains intentionally blocked until Phase 9.
-* [ ] `git status` is clean after the final Phase 8 commit.
+* [x] `npm run check` passes.
+* [x] Packed-package smoke tests pass.
+* [x] Full GitHub Actions Node/OS matrix passes.
+* [x] Changelog reflects Phase 8 hardening.
+* [x] Package metadata has received a final review.
+* [x] Packed artifact has received a final review.
+* [x] README has received a final user-facing review.
+* [x] Publication remains intentionally blocked until Phase 9.
+* [x] `git status` is clean after the final Phase 8 commit.
 
 ---
 
@@ -397,16 +397,16 @@ The homepage route is an MVP requirement.
 
 ### 8E — Final Readiness
 
-* [ ] Review package metadata one final time.
-* [ ] Review packed artifact one final time.
-* [ ] Review installed-package smoke results.
-* [ ] Review README one final time.
-* [ ] Update CHANGELOG.md.
-* [ ] Run final `npm run check`.
-* [ ] Verify all OS/Node CI jobs.
-* [ ] Verify publication remains blocked until Phase 9.
-* [ ] Confirm `git status` is clean.
-* [ ] Mark Phase 8 complete.
+* [x] Review package metadata one final time.
+* [x] Review packed artifact one final time.
+* [x] Review installed-package smoke results.
+* [x] Review README one final time.
+* [x] Update CHANGELOG.md.
+* [x] Run final `npm run check`.
+* [x] Verify all OS/Node CI jobs.
+* [x] Verify publication remains blocked until Phase 9.
+* [x] Confirm `git status` is clean.
+* [x] Mark Phase 8 complete.
 
 ---
 
