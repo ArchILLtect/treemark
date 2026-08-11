@@ -382,18 +382,18 @@ The homepage route is an MVP requirement.
 
 ### 8D — README / Public Docs
 
-* [ ] Review README from a new-user perspective.
-* [ ] Update installation instructions.
-* [ ] Update quick start.
-* [ ] Document output modes.
-* [ ] Document synchronization markers and ownership behavior.
-* [ ] Document safe `--update` workflow.
-* [ ] Document `--check` and exit codes.
-* [ ] Document relevant CLI options.
-* [ ] Document Node support.
-* [ ] Review limitations/deferred-feature wording.
-* [ ] Compare README examples against `treemark --help`.
-* [ ] Review repository links/contact paths.
+* [x] Review README from a new-user perspective.
+* [x] Update installation instructions.
+* [x] Update quick start.
+* [x] Document output modes.
+* [x] Document synchronization markers and ownership behavior.
+* [x] Document safe `--update` workflow.
+* [x] Document `--check` and exit codes.
+* [x] Document relevant CLI options.
+* [x] Document Node support.
+* [x] Review limitations/deferred-feature wording.
+* [x] Compare README examples against `treemark --help`.
+* [x] Review repository links/contact paths.
 
 ### 8E — Final Readiness
 
