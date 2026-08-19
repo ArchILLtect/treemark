@@ -6,6 +6,7 @@ import {
   resolve,
   sep,
 } from "node:path";
+import { readFileSync } from "node:fs";
 import { realpath, writeFile } from "node:fs/promises";
 import { scanDirectory } from "../scan/scan-directory.js";
 import { validateOutputTarget } from "./validate-output-target.js";
@@ -18,7 +19,22 @@ import { checkOutputFile } from "../check/check-output-file.js";
 import { checkUpdateFile } from "../check/check-update-file.js";
 import type { FreshnessStatus } from "../check/check-content.js";
 
-const DEVELOPMENT_VERSION = "0.0.0-development";
+interface PackageMetadata {
+  version: string;
+}
+
+function getPackageVersion(): string {
+  const packageJsonUrl = new URL(
+    "../../package.json",
+    import.meta.url,
+  );
+
+  const packageMetadata = JSON.parse(
+    readFileSync(packageJsonUrl, "utf8"),
+  ) as PackageMetadata;
+
+  return packageMetadata.version;
+}
 
 function parseMaxDepth(value: string): number {
   const parsed = Number(value);
@@ -63,7 +79,7 @@ export function createProgram(): Command {
     .description(
       "Generate and synchronize Markdown-friendly directory trees.",
     )
-    .version(DEVELOPMENT_VERSION, "-v, --version")
+    .version(getPackageVersion(), "-v, --version")
     .argument("<root>", "directory to scan")
     .option(
       "-f, --format <format>",

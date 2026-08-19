@@ -1,7 +1,6 @@
 {
   "name": "treemark",
-  "version": "0.0.0-development",
-  "private": true,
+  "version": "1.0.0",
   "description": "Generate and synchronize Markdown-friendly directory trees.",
   "homepage": "https://nickhanson.me/projects/treemark",
   "repository": {
@@ -14,7 +13,7 @@
   "author": "Nick Hanson",
   "type": "module",
   "bin": {
-    "treemark": "./dist/cli.js"
+    "treemark": "dist/cli.js"
   },
   "files": [
     "dist",

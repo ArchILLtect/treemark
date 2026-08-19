@@ -6,6 +6,10 @@ The format is based on Keep a Changelog, and the project will use Semantic Versi
 
 ## [Unreleased]
 
+#### [nothing]
+
+## [1.0.0] - 2026-08-18
+
 ### Added
 
 - Initial MVP product contract.
