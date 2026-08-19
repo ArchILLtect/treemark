@@ -1,7 +1,7 @@
 # TreeMark Product Contract
 
 Status: **Locked for MVP implementation**  
-Target release: **0.1.0**
+Target release: **1.0.0**
 
 ## 1. Product definition
 
@@ -376,7 +376,7 @@ Required cross-platform coverage includes:
 
 ## 20. MVP acceptance criteria
 
-Version `0.1.0` is ready for beta use when:
+Version `1.0.0` is ready for public release when:
 
 1. A fixture directory produces stable Markdown and ASCII output.
 2. Ignore patterns and max depth behave as documented.
@@ -389,14 +389,16 @@ Version `0.1.0` is ready for beta use when:
 9. CI passes on Ubuntu, Windows, and macOS.
 10. The README documents commands, markers, exit codes, limitations, and CI use.
 
-## 21. Open decisions intentionally postponed
+## 21. Resolved publication decisions
 
-These are not blockers for repository setup:
+The following decisions were finalized during MVP implementation and release
+hardening:
 
-- Final npm registry name and scope.
-- Whether raw stdout ASCII includes a Markdown fence.
-- Exact default ignore behavior beyond `.git` and `node_modules`.
-- Whether all file types are linked or only Markdown-compatible files.
-- Whether Node 22 remains the minimum at publication time.
-
-Each must be resolved before its corresponding implementation is considered complete.
+- Public npm package name: `treemark-cli`.
+- Package remains unscoped and public.
+- Installed CLI command remains `treemark`.
+- Raw ASCII stdout is emitted as plain deterministic ASCII without a Markdown
+  fence.
+- Default ignores are `.git/**` and `node_modules/**`.
+- Markdown output links files by default regardless of file type.
+- Node.js 22 remains the minimum supported version for v1.0.0.

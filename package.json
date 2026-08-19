@@ -1,5 +1,5 @@
 {
-  "name": "treemark",
+  "name": "treemark-cli",
   "version": "1.0.0",
   "description": "Generate and synchronize Markdown-friendly directory trees.",
   "homepage": "https://nickhanson.me/projects/treemark",

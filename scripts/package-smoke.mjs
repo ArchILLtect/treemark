@@ -140,7 +140,7 @@ try {
   const treemarkCliPath = join(
     consumerDirectory,
     "node_modules",
-    "treemark",
+    packageJson.name,
     "dist",
     "cli.js",
   );
