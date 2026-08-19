@@ -250,7 +250,7 @@ index.md
 Rules:
 
 - ASCII output is emitted inside a fenced `text` code block when inserted into Markdown.
-- Raw stdout behavior may be finalized during renderer implementation, but must remain deterministic.
+- Raw stdout emits plain deterministic ASCII without a Markdown fence.
 - ASCII labels are not clickable.
 
 ## 14. Marked-section contract
@@ -394,8 +394,8 @@ Version `1.0.0` is ready for public release when:
 The following decisions were finalized during MVP implementation and release
 hardening:
 
-- Public npm package name: `treemark-cli`.
-- Package remains unscoped and public.
+- Public npm package name: `@nickhansonsr/treemark`.
+- Package is scoped to `@nickhansonsr` and published publicly.
 - Installed CLI command remains `treemark`.
 - Raw ASCII stdout is emitted as plain deterministic ASCII without a Markdown
   fence.
