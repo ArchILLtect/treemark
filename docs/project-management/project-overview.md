@@ -20,9 +20,9 @@ Phase documents describe how that contract is implemented.
 | 5  | File output | ✅ Complete |
 | 6  | Markdown synchronization | ✅ Complete |
 | 7  | Check mode | ✅ Complete |
-| 8  | Package hardening | ⬜ Planned |
-| 9  | npm publication | ⬜ Planned |
-| 10 | Treemark landing page | ⬜ Planned |
+| 8  | Package hardening | ✅ Complete |
+| 9  | npm publication | 🚧 In Progress |
+| 10 | TreeMark landing page | ⬜ Planned |
 
 ## Working Rules
 
