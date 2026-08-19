@@ -1,6 +1,6 @@
 # Phase 9 — npm Publication
 
-Status: **In Progress — published and verified; final CI/closure checks remain**
+Status: **Complete**
 
 ## Goal
 
@@ -411,13 +411,13 @@ package version before npm's package page will receive the updated README.
 
 ### 9G — Close Phase
 
-* [ ] Confirm clean repository after pulling this documentation commit.
+* [x] Confirm clean repository after pulling this documentation commit.
 * [x] Confirm remote commit/tag.
-* [ ] Confirm final release-state CI is green.
+* [x] Confirm final release-state CI is green.
 * [x] Confirm v1.0.0 changelog state.
 * [x] Record npm package URL.
-* [ ] Mark Phase 9 **Complete**.
-* [ ] Begin Phase 10 — TreeMark landing page.
+* [x] Mark Phase 9 **Complete**.
+* [x] Begin Phase 10 — TreeMark landing page.
 
 ---
 
