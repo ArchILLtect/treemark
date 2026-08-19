@@ -59,7 +59,7 @@ Verify:
 - npm account exists and is accessible.
 - CLI is authenticated to the intended npm account.
 - Active npm registry is the public npm registry.
-- `treemark-cli` is still available for publication as an unscoped package.
+- `@nickhansonsr/treemark` is available for publication under the intended npm scope.
 - The intended package owner/account is correct.
 - Publishing authentication requirements are satisfied.
 - No unexpected `.npmrc` setting redirects publication to another registry.
@@ -69,7 +69,7 @@ Verify:
 No publication occurs in 9A.
 
 Integration note:
-`treemark` was unused but npm rejected it as too similar to `remark`, so the final registry name became `treemark-cli`.
+`treemark` was unused but npm rejected it as too similar to `remark`; `treemark-cli` was then rejected as too similar to `remark-cli`. The final registry name is the scoped package `@nickhansonsr/treemark`.
 
 ### 9B — v1.0.0 Release Metadata
 
@@ -79,7 +79,7 @@ Lock:
 
 ```json
 {
-  "name": "treemark-cli",
+  "name": "@nickhansonsr/treemark",
   "version": "1.0.0"
 }
 ```
@@ -88,7 +88,7 @@ Release changes:
 
 - Change version from `0.0.0-development` to `1.0.0`.
 - Remove `"private": true`.
-- Keep the package unscoped and public.
+- Keep the package scoped to `@nickhansonsr` and public.
 - Reconfirm description, author, license, repository, bugs, homepage, keywords, `engines`, `type`, `bin`, and `files`.
 - Ensure the README header asset and marker screenshots used by the public README are included by the package boundary.
 - Update `package-lock.json` so its package metadata matches v1.0.0.
@@ -141,18 +141,18 @@ Do not rewrite earlier history as part of the release.
 
 Publish only after 9A–9D pass.
 
-For an unscoped public package, publication is performed from the package root with npm's publish command.
+For the scoped public package, publication is performed from the package root with `npm publish --access=public`.
 
 Before confirming publication:
 
 - Confirm current directory is the TreeMark repository root.
-- Confirm package name is `treemark-cli`.
+- Confirm package name is `@nickhansonsr/treemark`.
 - Confirm version is `1.0.0`.
 - Confirm Git status is clean.
-- Confirm the release tag/commit is pushed and CI is green.
+- Confirm the release commit is pushed and CI is green.
 - Confirm final dry-run contents one last time.
 
-Then publish v1.0.0.
+Then publish v1.0.0 with `npm publish --access=public`.
 
 Record:
 
@@ -167,7 +167,7 @@ Do not consider publication complete merely because `npm publish` exits successf
 
 Verify the live registry result:
 
-- `treemark-cli@1.0.0` resolves from npm.
+- `@nickhansonsr/treemark@1.0.0` resolves from npm.
 - npm package page exists and is public.
 - npm page renders the intended README and branding.
 - Description, license, repository, homepage, issue tracker, version, Node requirement, and install command are correct.
@@ -175,7 +175,7 @@ Verify the live registry result:
 - `latest` resolves to v1.0.0.
 - No accidental package files are visible.
 
-After `treemark-cli@1.0.0` is confirmed live and correct on npm:
+After `@nickhansonsr/treemark@1.0.0` is confirmed live and correct on npm:
 
 1. Create an annotated signed Git tag:
 
@@ -200,7 +200,7 @@ Then test as a real consumer using the registry rather than the local tarball.
 Create a clean temporary consumer environment and verify:
 
 ```text
-install treemark from npm
+install @nickhansonsr/treemark from npm
 → treemark --version
 → treemark --help
 → Markdown stdout
@@ -215,7 +215,7 @@ install treemark from npm
 Also verify a global registry install:
 
 ```bash
-npm install --global treemark-cli
+npm install --global @nickhansonsr/treemark
 ```
 
 and confirm:
@@ -255,7 +255,7 @@ package version before npm's package page will receive the updated README.
 
 * [ ] npm CLI is authenticated to the intended account.
 * [ ] Active npm registry is correct.
-* [ ] `treemark-cli` package-name availability is confirmed immediately before publication.
+* [ ] `@nickhansonsr/treemark` scoped package availability is confirmed immediately before publication.
 * [ ] Intended package ownership is confirmed.
 * [ ] Publishing authentication requirements are satisfied.
 * [ ] Local npm configuration does not unexpectedly redirect publication.
@@ -265,7 +265,7 @@ package version before npm's package page will receive the updated README.
 * [ ] `package.json` version is `1.0.0`.
 * [ ] `package-lock.json` package metadata matches `1.0.0`.
 * [ ] `"private": true` has been intentionally removed.
-* [ ] Package remains an unscoped public CLI package.
+* [ ] Package is a public CLI package scoped to `@nickhansonsr`.
 * [ ] `bin` still points to `dist/cli.js`.
 * [ ] Node engine requirement remains `>=22`.
 * [ ] License is MIT and matches `LICENSE`.
@@ -307,8 +307,8 @@ package version before npm's package page will receive the updated README.
 
 * [ ] Final package name/version rechecked immediately before publish.
 * [ ] Final dry-run reviewed.
-* [ ] `npm publish` succeeds.
-* [ ] Registry reports `treemark-cli@1.0.0`.
+* [ ] `npm publish --access=public` succeeds.
+* [ ] Registry reports `@nickhansonsr/treemark@1.0.0`.
 * [ ] `latest` points to `1.0.0`.
 * [ ] Package page is publicly accessible.
 * [ ] npm README/banner renders correctly.
@@ -317,7 +317,7 @@ package version before npm's package page will receive the updated README.
 
 ### Registry Consumer Test
 
-* [ ] Fresh consumer installs `treemark-cli` from the npm registry.
+* [ ] Fresh consumer installs `@nickhansonsr/treemark` from the npm registry.
 * [ ] Registry-installed `treemark --version` reports `1.0.0`.
 * [ ] Registry-installed `treemark --help` works.
 * [ ] Markdown stdout works.
@@ -327,7 +327,7 @@ package version before npm's package page will receive the updated README.
 * [ ] Current `--check` exits `0`.
 * [ ] Stale `--check` exits `2`.
 * [ ] Operational failure exits `1`.
-* [ ] Global `npm install --global treemark-cli` succeeds.
+* [ ] Global `npm install --global @nickhansonsr/treemark` succeeds.
 * [ ] Globally installed `treemark --version` reports `1.0.0`.
 
 ### Closure
@@ -349,7 +349,7 @@ package version before npm's package page will receive the updated README.
 * [x] Check npm account/authentication.
 * [x] Check active registry.
 * [x] Check local `.npmrc` publication-relevant settings.
-* [x] Verify final `treemark-cli` live registry availability.
+* [x] Verify final `@nickhansonsr/treemark` scoped registry availability.
 * [x] Verify intended ownership/account.
 * [x] Verify publishing authentication readiness.
 * [x] Record any account/security setup needed before publication.
@@ -391,7 +391,7 @@ package version before npm's package page will receive the updated README.
 * [ ] Reconfirm package name/version.
 * [ ] Reconfirm registry/account.
 * [ ] Re-run or review final publish dry-run.
-* [ ] Publish `treemark-cli@1.0.0`.
+* [ ] Publish `@nickhansonsr/treemark@1.0.0` with `--access=public`.
 * [ ] Record successful publish result.
 
 ### 9F — Verify npm Release
@@ -427,7 +427,7 @@ package version before npm's package page will receive the updated README.
 
 Phase 9 is complete when:
 
-1. TreeMark is published publicly to npm as `treemark-cli@1.0.0`.
+1. TreeMark is published publicly to npm as `@nickhansonsr/treemark@1.0.0`.
 2. The `latest` npm dist-tag resolves to v1.0.0.
 3. The npm package page is public and renders the intended README/branding.
 4. Public package metadata is accurate.
