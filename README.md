@@ -29,7 +29,7 @@ review.
 ## Installation
 
 ```bash
-npm install --global treemark-cli
+npm install --global @nickhansonsr/treemark
 ```
 
 Then run:
