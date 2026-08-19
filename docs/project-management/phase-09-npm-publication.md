@@ -1,6 +1,6 @@
 # Phase 9 — npm Publication
 
-Status: **In Progress**
+Status: **In Progress — published and verified; final CI/closure checks remain**
 
 ## Goal
 
@@ -129,11 +129,7 @@ Do not create the `v1.0.0` tag yet.
 
 The release tag will be created only after npm publication succeeds and the registry-hosted package has been verified.
 
-Recommended commit message:
-
-```text
-chore(release): prepare v1.0.0
-```
+The final release state was reached through a small sequence of release-prep commits as registry naming was corrected before publication. The final scoped-package release commit was signed and pushed before publication.
 
 Do not rewrite earlier history as part of the release.
 
@@ -154,12 +150,13 @@ Before confirming publication:
 
 Then publish v1.0.0 with `npm publish --access=public`.
 
-Record:
+Publication record:
 
-- npm CLI success output.
-- Published package/version.
-- Any registry integrity or provenance information surfaced by npm.
-- Publication timestamp if useful for project records.
+- Package: `@nickhansonsr/treemark@1.0.0`.
+- Published successfully on 2026-08-19.
+- npm publication timestamp: `2026-08-19T21:38:37.849Z`.
+- npm package page: https://www.npmjs.com/package/@nickhansonsr/treemark
+- npm CLI reported successful publication with public access and the `latest` tag.
 
 ### 9F — Registry and Consumer Verification
 
@@ -230,7 +227,7 @@ reports:
 1.0.0
 ```
 
-Remove or retain the global installation according to local preference after verification.
+The global install was verified successfully. On the release machine, npm's global prefix directory had to be added to the Windows user `PATH` before the globally installed `treemark` command was discoverable; the package installation and npm-generated command shims themselves were correct.
 
 ### 9G — First-Release Closure
 
@@ -238,9 +235,9 @@ After registry verification:
 
 - Confirm Git status is clean.
 - Confirm release commit/tag remain present remotely.
-- Confirm CI remains green.
+- Confirm CI remains green for the final release state.
 - Confirm changelog represents the released version correctly.
-- Record the npm package URL in project documentation if needed.
+- Record the npm package URL in project documentation.
 - Mark Phase 9 complete.
 - Move immediately to Phase 10 — TreeMark landing page.
 
@@ -253,90 +250,91 @@ package version before npm's package page will receive the updated README.
 
 ### Registry / Account
 
-* [ ] npm CLI is authenticated to the intended account.
-* [ ] Active npm registry is correct.
-* [ ] `@nickhansonsr/treemark` scoped package availability is confirmed immediately before publication.
-* [ ] Intended package ownership is confirmed.
-* [ ] Publishing authentication requirements are satisfied.
-* [ ] Local npm configuration does not unexpectedly redirect publication.
+* [x] npm CLI is authenticated to the intended account.
+* [x] Active npm registry is correct.
+* [x] `@nickhansonsr/treemark` scoped package availability is confirmed immediately before publication.
+* [x] Intended package ownership is confirmed.
+* [x] Publishing authentication requirements are satisfied.
+* [x] Local npm configuration does not unexpectedly redirect publication.
 
 ### v1.0.0 Metadata
 
-* [ ] `package.json` version is `1.0.0`.
-* [ ] `package-lock.json` package metadata matches `1.0.0`.
-* [ ] `"private": true` has been intentionally removed.
-* [ ] Package is a public CLI package scoped to `@nickhansonsr`.
-* [ ] `bin` still points to `dist/cli.js`.
-* [ ] Node engine requirement remains `>=22`.
-* [ ] License is MIT and matches `LICENSE`.
-* [ ] Repository URL is correct.
-* [ ] Issues URL is correct.
-* [ ] Homepage is `https://nickhanson.me/projects/treemark`.
-* [ ] README branding assets referenced by the README are included.
-* [ ] Public package boundary remains intentional.
-* [ ] No unsupported programmatic API is implied.
+* [x] `package.json` version is `1.0.0`.
+* [x] `package-lock.json` package metadata matches `1.0.0`.
+* [x] `"private": true` has been intentionally removed.
+* [x] Package is a public CLI package scoped to `@nickhansonsr`.
+* [x] `bin` still points to `dist/cli.js`.
+* [x] Node engine requirement remains `>=22`.
+* [x] License is MIT and matches `LICENSE`.
+* [x] Repository URL is correct.
+* [x] Issues URL is correct.
+* [x] Homepage is `https://nickhanson.me/projects/treemark`.
+* [x] README branding assets referenced by the README are included.
+* [x] Public package boundary remains intentional.
+* [x] No unsupported programmatic API is implied.
 
 ### Release Candidate
 
-* [ ] `npm run check` passes.
-* [ ] All 161+ tests pass.
-* [ ] `npm run smoke:package` passes all smoke steps.
-* [ ] `npm publish --dry-run` succeeds.
-* [ ] Dry-run file list is intentionally minimal.
-* [ ] `dist/cli.js` shebang/entry is correct.
-* [ ] CLI reports version `1.0.0`.
-* [ ] README renders correctly from the release candidate.
-* [ ] Final Git diff contains only intended release changes.
+* [x] `npm run check` passes.
+* [x] All 161+ tests pass.
+* [x] `npm run smoke:package` passes all smoke steps.
+* [x] `npm publish --access public --dry-run` succeeds.
+* [x] Dry-run file list is intentionally minimal.
+* [x] `dist/cli.js` shebang/entry is correct.
+* [x] CLI reports version `1.0.0`.
+* [x] README renders correctly from the release candidate.
+* [x] Final Git diff contains only intended release changes.
 
 ### Git Release State
 
-* [ ] Release commit created.
-* [ ] Release commit is signed/verified.
-* [ ] Release commit pushed.
-* [ ] Full GitHub Actions Node 22/24 × Windows/macOS/Ubuntu matrix passes.
-* [ ] Working tree is clean immediately before publication.
-* [ ] npm publication succeeds before the release tag is created.
-* [ ] Annotated signed `v1.0.0` tag created after npm verification.
-* [ ] Tag points to the intended release commit.
-* [ ] Tag signature is verified.
-* [ ] Release tag pushed.
-* [ ] GitHub Release `TreeMark v1.0.0` created from the `v1.0.0` tag.
-* [ ] GitHub Release points to the intended release commit.
+* [x] Release commit created.
+* [x] Release commit is signed/verified.
+* [x] Release commit pushed.
+* [ ] Full GitHub Actions Node 22/24 × Windows/macOS/Ubuntu matrix is confirmed green for the final scoped-package release state.
+* [x] Working tree is clean immediately before publication.
+* [x] npm publication succeeds before the release tag is created.
+* [x] Annotated signed `v1.0.0` tag created after npm verification.
+* [x] Tag points to the intended release commit.
+* [x] Tag signature is verified.
+* [x] Release tag pushed.
+* [x] GitHub Release `TreeMark v1.0.0` created from the `v1.0.0` tag.
+* [x] GitHub Release points to the intended release commit.
 
 ### npm Publication
 
-* [ ] Final package name/version rechecked immediately before publish.
-* [ ] Final dry-run reviewed.
-* [ ] `npm publish --access=public` succeeds.
-* [ ] Registry reports `@nickhansonsr/treemark@1.0.0`.
-* [ ] `latest` points to `1.0.0`.
-* [ ] Package page is publicly accessible.
-* [ ] npm README/banner renders correctly.
-* [ ] npm metadata is correct.
-* [ ] Published package contents are correct.
+* [x] Final package name/version rechecked immediately before publish.
+* [x] Final dry-run reviewed.
+* [x] `npm publish --access=public` succeeds.
+* [x] Registry reports `@nickhansonsr/treemark@1.0.0`.
+* [x] `latest` points to `1.0.0`.
+* [x] Package page is publicly accessible.
+* [x] npm README/banner renders correctly.
+* [x] npm metadata is correct.
+* [x] Published package contents are correct.
 
 ### Registry Consumer Test
 
-* [ ] Fresh consumer installs `@nickhansonsr/treemark` from the npm registry.
-* [ ] Registry-installed `treemark --version` reports `1.0.0`.
-* [ ] Registry-installed `treemark --help` works.
-* [ ] Markdown stdout works.
-* [ ] ASCII stdout works.
-* [ ] `--output` works.
-* [ ] `--update` works.
-* [ ] Current `--check` exits `0`.
-* [ ] Stale `--check` exits `2`.
-* [ ] Operational failure exits `1`.
-* [ ] Global `npm install --global @nickhansonsr/treemark` succeeds.
-* [ ] Globally installed `treemark --version` reports `1.0.0`.
+* [x] Fresh consumer installs `@nickhansonsr/treemark` from the npm registry.
+* [x] Registry-installed `treemark --version` reports `1.0.0`.
+* [x] Registry-installed `treemark --help` works.
+* [x] Markdown stdout works.
+* [x] ASCII stdout works.
+* [x] `--output` works.
+* [x] `--update` works.
+* [x] Current `--check` exits `0`.
+* [x] Stale `--check` exits `2`.
+* [x] Operational failure exits `1`.
+* [x] Global `npm install --global @nickhansonsr/treemark` succeeds.
+* [x] Globally installed `treemark --version` reports `1.0.0`.
+* [x] Globally installed `treemark --help` works.
 
 ### Closure
 
-* [ ] Git status is clean.
-* [ ] Release commit/tag are present remotely.
-* [ ] CI remains green.
-* [ ] Changelog reflects v1.0.0 release.
-* [ ] npm package URL is recorded where appropriate.
+* [ ] Git status is clean after pulling the final Phase 9 documentation update.
+* [x] Release commit/tag are present remotely.
+* [ ] CI remains green for the final release state.
+* [x] Changelog reflects v1.0.0 release.
+* [x] npm package URL is recorded in this phase document.
 * [ ] Phase 9 status changed to **Complete**.
 * [ ] Phase 10 landing-page work can begin.
 
@@ -356,68 +354,68 @@ package version before npm's package page will receive the updated README.
 
 ### 9B — Prepare v1.0.0
 
-* [ ] Set version to `1.0.0`.
-* [ ] Update matching lockfile version metadata.
-* [ ] Remove `private` publication guard.
-* [ ] Review complete public metadata.
-* [ ] Review package `files` boundary including README assets.
-* [ ] Review README one final time in v1.0.0 state.
-* [ ] Update changelog from Unreleased to v1.0.0 as appropriate.
-* [ ] Confirm no new product behavior entered Phase 9.
+* [x] Set version to `1.0.0`.
+* [x] Update matching lockfile version metadata.
+* [x] Remove `private` publication guard.
+* [x] Review complete public metadata.
+* [x] Review package `files` boundary including README assets.
+* [x] Review README one final time in v1.0.0 state.
+* [x] Update changelog from Unreleased to v1.0.0 as appropriate.
+* [x] Confirm no new product behavior entered Phase 9.
 
 ### 9C — Final Artifact Gate
 
-* [ ] Run `npm run check`.
-* [ ] Run `npm run smoke:package`.
-* [ ] Run `npm publish --dry-run`.
-* [ ] Inspect complete dry-run file list.
-* [ ] Verify CLI version output is `1.0.0`.
-* [ ] Verify public README assets are present.
-* [ ] Verify development-only files remain absent.
-* [ ] Review final Git diff.
+* [x] Run `npm run check`.
+* [x] Run `npm run smoke:package`.
+* [x] Run `npm publish --access public --dry-run`.
+* [x] Inspect complete dry-run file list.
+* [x] Verify CLI version output is `1.0.0`.
+* [x] Verify public README assets are present.
+* [x] Verify development-only files remain absent.
+* [x] Review final Git diff.
 
 ### 9D — Git Release Commit / CI Gate
 
-* [ ] Create `chore(release): prepare v1.0.0` commit.
-* [ ] Verify release commit signature.
-* [ ] Push release commit.
-* [ ] Wait for and verify 6/6 CI.
-* [ ] Confirm working tree is clean.
-* [ ] Confirm no `v1.0.0` tag has been created yet.
+* [x] Create and finalize the signed v1.0.0 release-prep commit sequence.
+* [x] Verify final release commit signature.
+* [x] Push final release commit.
+* [ ] Verify 6/6 CI for the final scoped-package release state.
+* [x] Confirm working tree is clean before publication.
+* [x] Confirm no `v1.0.0` tag has been created before npm publication.
 
 ### 9E — Publish
 
-* [ ] Confirm clean Git status.
-* [ ] Reconfirm package name/version.
-* [ ] Reconfirm registry/account.
-* [ ] Re-run or review final publish dry-run.
-* [ ] Publish `@nickhansonsr/treemark@1.0.0` with `--access=public`.
-* [ ] Record successful publish result.
+* [x] Confirm clean Git status.
+* [x] Reconfirm package name/version.
+* [x] Reconfirm registry/account.
+* [x] Re-run and review final public-access publish dry-run.
+* [x] Publish `@nickhansonsr/treemark@1.0.0` with `--access=public`.
+* [x] Record successful publish result.
 
 ### 9F — Verify npm Release
 
-* [ ] Verify npm package page.
-* [ ] Verify npm metadata.
-* [ ] Verify README/banner.
-* [ ] Verify published tarball contents.
-* [ ] Verify `latest` dist-tag.
-* [ ] Install from registry into fresh consumer.
-* [ ] Run registry consumer smoke checks.
-* [ ] Install globally from registry.
-* [ ] Verify global CLI version/help.
-* [ ] Create annotated signed `v1.0.0` tag.
-* [ ] Verify tag target and signature.
-* [ ] Push `v1.0.0` tag.
-* [ ] Create GitHub Release `TreeMark v1.0.0`.
-* [ ] Verify GitHub Release points to the correct tag/commit.
+* [x] Verify npm package page.
+* [x] Verify npm metadata.
+* [x] Verify README/banner.
+* [x] Verify published tarball contents.
+* [x] Verify `latest` dist-tag.
+* [x] Install from registry into fresh consumer.
+* [x] Run registry consumer smoke checks.
+* [x] Install globally from registry.
+* [x] Verify global CLI version/help.
+* [x] Create annotated signed `v1.0.0` tag.
+* [x] Verify tag target and signature.
+* [x] Push `v1.0.0` tag.
+* [x] Create GitHub Release `TreeMark v1.0.0`.
+* [x] Verify GitHub Release points to the correct tag/commit.
 
 ### 9G — Close Phase
 
-* [ ] Confirm clean repository.
-* [ ] Confirm remote commit/tag.
-* [ ] Confirm CI green.
-* [ ] Confirm v1.0.0 changelog state.
-* [ ] Record npm package URL.
+* [ ] Confirm clean repository after pulling this documentation commit.
+* [x] Confirm remote commit/tag.
+* [ ] Confirm final release-state CI is green.
+* [x] Confirm v1.0.0 changelog state.
+* [x] Record npm package URL.
 * [ ] Mark Phase 9 **Complete**.
 * [ ] Begin Phase 10 — TreeMark landing page.
 
@@ -439,9 +437,9 @@ Phase 9 is complete when:
 10. Global installation from npm succeeds and exposes the `treemark` command.
 11. The npm publication corresponds to a clean, pushed, signed Git release commit that passed the full CI matrix before publication.
 12. After successful npm publication, the release has an annotated signed `v1.0.0` tag pointing to the exact release commit, and a public GitHub Release has been created from that tag.
-13. The full GitHub Actions Node/OS matrix passes for the release state.
+13. The full GitHub Actions Node/OS matrix passes for the final release state.
 14. The changelog reflects the v1.0.0 release.
-15. Git status is clean after publication verification.
+15. Git status is clean after publication verification and Phase 9 documentation closure.
 16. TreeMark is ready for its Phase 10 public landing/showcase page.
 
 ---
