@@ -6,9 +6,24 @@ The format is based on Keep a Changelog, and the project will use Semantic Versi
 
 ## [Unreleased]
 
-#### [nothing]
+### Added
 
-## [1.0.0] - 2026-08-18
+- Public TreeMark landing page at `https://nickhanson.me/projects/treemark`,
+  with installation guidance, real CLI examples, product capabilities, release
+  links, responsive presentation, accessibility coverage, and social metadata.
+- Phase 10 completion record and checklist documenting the landing-page launch,
+  production verification, and Showcase Site dogfooding outcome.
+- Post-MVP follow-up tracking for nested `node_modules` ignore behavior and
+  collapsible presentation of larger generated trees.
+
+### Changed
+
+- Project-management status now records npm publication and the TreeMark
+  landing page as complete, closing the planned MVP roadmap.
+- Deferred-feature documentation now reflects that `--update` and `--check`
+  shipped in v1.0.0 and that remaining work is post-MVP.
+
+## [1.0.0] - 2026-08-19
 
 ### Added
 

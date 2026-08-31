@@ -290,7 +290,7 @@ package version before npm's package page will receive the updated README.
 * [x] Release commit created.
 * [x] Release commit is signed/verified.
 * [x] Release commit pushed.
-* [ ] Full GitHub Actions Node 22/24 × Windows/macOS/Ubuntu matrix is confirmed green for the final scoped-package release state.
+* [x] Full GitHub Actions Node 22/24 × Windows/macOS/Ubuntu matrix is confirmed green for the final scoped-package release state.
 * [x] Working tree is clean immediately before publication.
 * [x] npm publication succeeds before the release tag is created.
 * [x] Annotated signed `v1.0.0` tag created after npm verification.
@@ -330,13 +330,13 @@ package version before npm's package page will receive the updated README.
 
 ### Closure
 
-* [ ] Git status is clean after pulling the final Phase 9 documentation update.
+* [x] Git status is clean after pulling the final Phase 9 documentation update.
 * [x] Release commit/tag are present remotely.
-* [ ] CI remains green for the final release state.
+* [x] CI remains green for the final release state.
 * [x] Changelog reflects v1.0.0 release.
 * [x] npm package URL is recorded in this phase document.
-* [ ] Phase 9 status changed to **Complete**.
-* [ ] Phase 10 landing-page work can begin.
+* [x] Phase 9 status changed to **Complete**.
+* [x] Phase 10 landing-page work can begin.
 
 ---
 

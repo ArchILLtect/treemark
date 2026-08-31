@@ -1,7 +1,11 @@
 # TreeMark Product Contract
 
-Status: **Locked for MVP implementation**  
+Status: **Fulfilled by v1.0.0**
+
 Target release: **1.0.0**
+
+This document is the historical contract implemented by the v1.0.0 release.
+Post-MVP work is tracked separately and does not change the released contract.
 
 ## 1. Product definition
 

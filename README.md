@@ -21,6 +21,10 @@ TreeMark is designed for documentation workflows, project structure maps, and
 CI checks where generated directory trees should stay predictable and easy to
 review.
 
+TreeMark v1.0.0 is publicly released, and its planned MVP roadmap—including the
+production project landing page—is complete. Ongoing work is post-MVP
+maintenance and feature development.
+
 ## Requirements
 
 - Node.js 22 or newer.
@@ -343,6 +347,7 @@ The README itself is excluded automatically because it is the update target.
 - [LICENSE](LICENSE)
 - [package-lock.json](package-lock.json)
 - [package.json](package.json)
+- [TODO.md](TODO.md)
 - [tsconfig.build.json](tsconfig.build.json)
 - [tsconfig.json](tsconfig.json)
 <!-- treemark:end -->
