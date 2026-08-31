@@ -1,6 +1,6 @@
 # TreeMark Project Management
 
-This directory tracks implementation phases, decisions, acceptance criteria,
+This directory records implementation phases, decisions, acceptance criteria,
 and completion status for the TreeMark MVP.
 
 The authoritative product behavior is defined in:
@@ -10,6 +10,10 @@ The authoritative product behavior is defined in:
 Phase documents describe how that contract is implemented.
 
 ## MVP Progress
+
+TreeMark's planned MVP delivery is complete. Version 1.0.0 is publicly
+available on npm, and the production landing page is live at
+`https://nickhanson.me/projects/treemark`.
 
 | Phase | Description | Status |
 |---|---|---|
@@ -21,8 +25,12 @@ Phase documents describe how that contract is implemented.
 | 6  | Markdown synchronization | ✅ Complete |
 | 7  | Check mode | ✅ Complete |
 | 8  | Package hardening | ✅ Complete |
-| 9  | npm publication | 🚧 In Progress |
-| 10 | TreeMark landing page | ⬜ Planned |
+| 9  | npm publication | ✅ Complete |
+| 10 | TreeMark landing page | ✅ Complete |
+
+Future maintenance and feature work is post-MVP. See
+[`DEFERRED_FEATURES.md`](DEFERRED_FEATURES.md) and the repository
+[`TODO.md`](../../TODO.md) for the current backlog.
 
 ## Working Rules
 

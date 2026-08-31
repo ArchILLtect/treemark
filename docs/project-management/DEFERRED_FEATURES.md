@@ -55,6 +55,9 @@ Potential alternatives for very large directory structures:
 
 Status: Deferred post-MVP.
 
+The Phase 10 dogfooding follow-up to explore collapsible Markdown output is
+tracked in the repository [`TODO.md`](../../TODO.md).
+
 ---
 
 ## Additional Renderers
@@ -68,6 +71,16 @@ Status: Deferred post-MVP.
 ---
 
 ## Scanner and Filesystem Features
+
+### Nested default dependency ignores
+
+Review whether the built-in `node_modules/**` rule should exclude dependency
+directories at every depth, such as `backend/node_modules/**`. If that is the
+intended behavior, adopt an equivalent recursive pattern and add root-level and
+nested regression coverage.
+
+Status: Post-MVP follow-up tracked in the repository
+[`TODO.md`](../../TODO.md).
 
 ### Symlink traversal
 
@@ -332,9 +345,8 @@ Status: Deferred post-MVP.
 
 ## Notes
 
-- `--check` is not listed here while it remains part of the MVP roadmap; it is
-  scheduled for a later implementation phase rather than deferred from MVP.
-- `--update` is likewise active MVP work and belongs to Phase 6, not this file.
+- `--update` and `--check` shipped in v1.0.0 and are not deferred features.
+- The planned MVP roadmap and public landing-page phase are complete.
 - Items should only be added here when the project has explicitly decided to
   postpone them, not merely because they have not been implemented yet.
 
